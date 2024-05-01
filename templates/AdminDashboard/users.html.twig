@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Users
+{% endblock %}
+
+{% block content %}
+	<main>
+		<h1>Users</h1>
+		<div class="input-group">
+			<input type="search" placeholder="Search a user...">
+			<span class="material-symbols-outlined">
+				search
+			</span>
+		</div>
+
+		<div class="users-table">
+			<table>
+				<thead>
+					<tr>
+						<th>Client ID</th>
+						<th>Firstname</th>
+						<th>Lastname</th>
+						<th>Email</th>
+						<th>Role</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr>
+						<td><?= $client['cid'] ?></td>
+						<td><?= $client['firstname'] ?></td>
+						<td><?= $client['lastname'] ?></td>
+						<td><?= $client['email'] ?></td>
+						<td><?php echo $client['isAdmin']===0 ? "User" : "Admin" ; ?></td>
+						<td class="action-btns">
+							<div style="display: inline-flex;">
+								<button class="edit-btn" onclick="location.href='editClients.php?cid=<?= $client['cid'] ?>'">
+									<span class="material-symbols-outlined">
+										edit
+									</span>
+								</button>
+								<form method="POST" action="deleteclient.php">
+									<input type="hidden" name="cid" value="<?= $client['cid'] ?>">
+									<button onclick="return confirm('Are you sure you want to delete this client?')" type="submit" class="delete-btn" name="delete">
+										<span class="material-symbols-outlined">
+											delete
+										</span>
+									</button>
+								</form>
+							</div>
+						</td>
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+	</main>
+{% endblock %}

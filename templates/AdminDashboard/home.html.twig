@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Admin Dashboard
+{% endblock %}
+
+{% block content %}
+	<main>
+		<h1>Home</h1>
+		<div class="home">
+			<div class="sales">
+				<div class="status">
+					<div class="info">
+						<h3>Monthly Sales</h3>
+						<h1>$5,024</h1>
+					</div>
+					<div class="progresss">
+						<svg>
+							<circle cx="38" cy="38" r="36"></circle>
+						</svg>
+						<div class="percentage">
+							<p>+81%</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="visits">
+				<div class="status">
+					<div class="info">
+						<h3>Site Visit</h3>
+						<h1>24,981</h1>
+					</div>
+					<div class="progresss">
+						<svg>
+							<circle cx="38" cy="38" r="36"></circle>
+						</svg>
+						<div class="percentage">
+							<p>-48%</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="searches">
+				<div class="status">
+					<div class="info">
+						<h3>Searches</h3>
+						<h1>14,147</h1>
+					</div>
+					<div class="progresss">
+						<svg>
+							<circle cx="38" cy="38" r="36"></circle>
+						</svg>
+						<div class="percentage">
+							<p>+21%</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="queue">
+				<div class="status">
+					<div class="info">
+						<h3>Pending Orders</h3>
+						<h1>63</h1>
+					</div>
+					<div class="progresss">
+						<svg>
+							<circle cx="38" cy="38" r="36"></circle>
+						</svg>
+						<div class="percentage">
+							<p>63</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="recent-orders">
+			<h2>Recent Orders</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>User ID</th>
+						<th>User</th>
+						<th>Book Name</th>
+						<th>Book ID</th>
+						<th>Order Date</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr>
+						<td><?= $row['cid'] ?></td>
+						<td><?= $row['firstname'] ?></td>
+						<td><?= $row['btitle'] ?></td>
+						<td><?= $row['bid'] ?></td>
+						<td><?= $row['cdate'] ?></td>
+						<td><?= $row['state'] ?></td>
+					</tr>
+				</tbody>
+			</table>
+			<a href="../AdminDashboard/orders/orders.php">Show All</a>
+		</div>
+	</main>
+{% endblock %}

@@ -1,0 +1,161 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Book info
+	{# we can add the book title  #}
+{% endblock %}
+
+{% block content %}
+	<main>
+		<!--https://marketplace.canva.com/EAFPHUaBrFc/1/0/1003w/canva-black-and-white-modern-alone-story-book-cover-QHBKwQnsgzs.jpg-->
+		<section class="description-sec">
+			<div class="image-container">
+				<img class="book-cover" src="" alt="book cover"/>
+			</div>
+			<div class="description-container">
+				<div class="title">
+					
+				</div>
+				<div class="daterelease">
+					Hardcover – January 21, 2025
+				</div>
+				<div class="author">
+					by
+					<span class="authorname"></span>
+					(Author)
+				</div>
+				<hr/>
+				<div class="preorder">
+					<span class="preorder-tag"></span>&nbsp;Pre-order Price Guarantee.
+				</div>
+				<div class="description-text">
+					Preorder now and receive the stunning DELUXE LIMITED EDITION while supplies last―featuring gorgeous sprayed edges with stenciled artwork,
+					          as well as exclusive special design features. This incredible collectible is only available for a limited time, a must-have for any book lover while supplies last in the US and Canada only.
+					          Get ready to fly or die in the breathtaking follow-up to Fourth Wing and Iron Flame from #1 New York Times bestselling author Rebecca Yarros.
+				</div>
+				<a class="report-issues" href="mailto:iheb.gafsi@insat.ucar.tn">Report an issue about this product</a>
+				<hr/>
+				<div class="general">
+					<div class="general-item">
+						<div class="general-item-title">
+							Language
+						</div>
+						<img class="general-item-image" src="https://cdn-icons-png.flaticon.com/512/44/44386.png" alt="item content"/>
+						<div class="general-item-value">
+							English
+						</div>
+					</div>
+					<div class="general-item">
+						<div class="general-item-title">
+							Publisher
+						</div>
+						<img class="general-item-image" src="../assets/building.png" alt="item content"/>
+						<div class="general-item-value">
+							Entangled: Red Tower Books
+						</div>
+					</div>
+					<div class="general-item">
+						<div class="general-item-title">
+							Publication date
+						</div>
+						<img class="general-item-image" src="../assets/calendar.png" alt="item content"/>
+						<div class="general-item-value">
+							January 21, 2025
+						</div>
+					</div>
+					<div class="general-item">
+						<div class="general-item-title">
+							Dimensions
+						</div>
+						<img class="general-item-image" src="../assets/dimensions.png" alt="item content"/>
+						<div class="general-item-value">
+							15 x 3 x 23 centimeters
+						</div>
+					</div>
+					<div class="general-item">
+						<div class="general-item-title">
+							Key
+						</div>
+						<img class="general-item-image" src="../assets/barcode.png" alt="item content"/>
+						<div class="general-item-value">
+							OL1077449W
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="purchase-details-container">
+			<div class="hardcover-price">
+				<span class="hardcover-text">Hardcover</span><br>
+				<span class="price1">
+					TND</span>
+			</div>
+			<span class="authorname">Other New</span>
+			From
+			<span class="authorname">
+				TND</span>
+			<hr/>
+			<div class="buy-new">
+				<span class="buy-new-text">Buy New</span>
+				<span class="price2">
+					TND</span>
+			</div>
+			<div class="actual-price">
+				<span class="normal-text">List Price:</span>
+				<span class="price3">
+					<s>
+						TND</s>
+				</span>
+			</div>
+			<div class="actual-price">
+				<span class="normal-text">Save:
+					
+					TND</span>
+			</div>
+			<div class="normal-text">
+				TND Shipping & Import Fees Deposit to Tunisia
+			</div>
+			<div class="normal-text">
+				Delivery
+				<span class="buy-new-text">Wednesday, January 22, 2025</span>
+			</div>
+			<div class="big-title">
+				This title will be released on January 21, 2025.
+			</div>
+		{# <?php
+        // check if the book is already in cart, if so we write a text else we write a btn-add-to-cart button
+        $query = "SELECT bid FROM command WHERE cid='" . $_SESSION['id'] . "' AND bid='$id'";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute();
+        $val = $stmt->fetchAll();
+        if ($val) {
+          echo '<p class="already-in-cart">This book is already in your cart</p>';
+        } else {
+          echo '<button id="btn-add-to-cart" class="btn-add-to-cart" onclick="add_to_cart(\'' . $id . '\')">Add to Cart &nbsp;<span class="cart-tag"></span></button>';
+        }
+        #}
+			<!--button class="btn-add-to-cart">Add to Cart &nbsp;<span class="cart-tag"></span></button-->
+			<table class="buy-info">
+				<tr>
+					<td>Ships from</td>
+					<td>Bookini</td>
+				</tr>
+				<tr>
+					<td>Sold by</td>
+					<td>Bookini.tn</td>
+				</tr>
+				<tr>
+					<td>Returns</td>
+					<td class="returns-payment">
+						Eligible for Return, Refund or Replacement within 30 days of receipt</td>
+				</tr>
+				<tr>
+					<td>Payment</td>
+					<td class="returns-payment">Secure transaction</td>
+				</tr>
+			</table>
+		</div>
+	</section>
+	<img class="page-breaker" src="../assets/books2.jpg"/>
+</main>{% endblock %}
