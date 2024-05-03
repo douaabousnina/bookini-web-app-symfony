@@ -1,16 +1,14 @@
 <?php
 
-// specifique à l admin dashboard
-
-namespace App\Controller;
+namespace App\Controller\AdminControllers;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-class UserController extends AbstractController
+class BookAdminController extends AbstractController
 {
-    #[Route('/user', name: 'app_user')]
+    #[Route('/book/admin', name: 'app_book_admin')]
     public function index(): Response
     {
         return $this->render('');
