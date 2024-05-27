@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\ClientControllers;
+// namespace App\Controller;
+
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,6 +13,9 @@ class BookController extends AbstractController
     #[Route('/book', name: 'app_book')]
     public function index(): Response
     {
-        return $this->render('');
+        // return $this->render('');
+        return new Response('<div >test</div>');
+
     }
+
 }

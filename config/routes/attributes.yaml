@@ -1,4 +1,8 @@
-controllers:
-    resource: '../../src/Controller/AdminControllers'
-    type: attribute
-    prefix: '/AdminDashboard'
+# controllers:
+#     resource: '../../src/Controller/AdminControllers'
+#     type: attribute
+#     prefix: '/AdminDashboard'
+
+# controllers:
+#     resource: '../../src/Controller'
+#     type: attribute
