@@ -122,7 +122,7 @@ b {
 .container {
   display: grid;
   width: 96%;
-  margin: 0 auto;
+  margin: 0;
   gap: 1.8rem;
   grid-template-columns: 12rem auto 2rem;
 }
@@ -212,14 +212,19 @@ aside .sidebar a.active span {
 
 aside .sidebar a:hover {
   color: var(--color-primary);
+  text-decoration: none;
 }
 
 aside .sidebar a:hover span {
   margin-left: 0.6rem;
+  text-decoration: none;
+
 }
 
 main {
   margin-top: 2.4rem;
+  width: 170vh;
+
 }
 
 main .home {
@@ -769,8 +774,10 @@ a {
   border-radius: 2rem;
   box-shadow: 0 0.05rem 0.2rem #0002;
   display: flex;
+  flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
+  
   margin-top: 12px;
   margin-bottom: 10px;
   transition: 0.2s;
