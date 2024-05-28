@@ -11,6 +11,7 @@ class OrderAdminController extends AbstractController
     #[Route('/order/admin', name: 'app_order_admin')]
     public function index(): Response
     {
-        return $this->render('');
+        // return new Response('OFFFFFFFFFFFFff');
+        return $this->render('AdminDashboard/orders.html.twig');
     }
 }
