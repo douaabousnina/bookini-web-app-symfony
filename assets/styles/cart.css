@@ -1,0 +1,128 @@
+.books-in-cart {
+    display: flex;
+    margin: 0 auto;
+    max-width: 1000px;
+    padding: 0 20px;
+    list-style: none;
+    color: rgb(0, 0, 0);
+}
+
+.books-in-cart {
+    display: block;
+    justify-content: space-between;
+    align-items: left;
+    text-align: left;
+    margin-bottom: 20px;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 70vh;
+    scrollbar-gutter: stable;
+    scrollbar-color: linear-gradient(180deg, #d0368a 0%, #708ad4 99%);
+}
+
+.books-in-cart::-webkit-scrollbar {
+    width: 16px;
+}
+
+.books-in-cart::-webkit-scrollbar-track {
+    background-color: #e4e4e4;
+    border-radius: 100px;
+}
+
+.books-in-cart::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(to bottom, #4924dd, #b62fff);
+    box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
+    border-radius: 100px;
+}
+
+.book-img {
+    width: 20%;
+    height: auto;
+    object-fit: cover;
+    margin-right: 20px;
+    border-radius: 10px;
+}
+
+.cart-item {
+    justify-content: space-between;
+    align-items: left;
+    text-align: left;
+    width: 100%;
+    border: 1px solid white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.486);
+    background: rgb(255, 255, 255);
+    border-radius: 10px;
+    display: flex;
+    padding: 2vmin 2vmin;
+    margin: 1em;
+}
+
+.book-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 80%;
+}
+
+.book-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    line-height: 1em;
+}
+
+.book-price {
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    line-height: 1em;
+    color: rgb(144, 0, 255);
+    text-align: right;
+    display: flex;
+    align-items: right;
+    justify-content: right;
+}
+
+.price-tag {
+    background: url(../assets/offer.png) no-repeat;
+    display: block;
+    width: 18px;
+    height: 18px;
+    background-size: 90%;
+    background-position: center center;
+}
+
+.book-author {
+    font-size: 0.8em;
+    margin-bottom: 5px;
+    color: rgb(40, 40, 40);
+    font-weight: bold;
+    font-style: italic;
+}
+
+.book-description {
+    font-size: 0.9em;
+}
+
+.remove-icon {
+    width: 5%;
+    height: auto;
+    object-fit: cover;
+    position: relative;
+}
+
+.remove-btn {
+    background: url(../assets/remove_desactivated.png) no-repeat;
+    border: none;
+    width: 20px;
+    height: 20px;
+    background-size: 80%;
+    background-position: center center;
+}
+
+.remove-btn:hover {
+    background: url(../assets/remove_activated.png) no-repeat;
+    background-size: 80%;
+    background-position: center center;
+}

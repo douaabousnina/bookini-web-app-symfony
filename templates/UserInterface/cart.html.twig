@@ -1,138 +1,49 @@
-{% extends 'base.html.twig' %}
+{% extends 'UserInterface/base.html.twig' %}
 
 {% block title %}
 	Cart
 {% endblock %}
-
-{% block content %}
-	<main>
-		<section class="book-sec">
-			<h2 class="book-category">Search, Read, And Purchase</h2>
-			<div class="container">
-				<div class="previous-list"></div>
-				<div class="book-list" id="first-list">
-					<div class="book-item" id="">
-						<a href="">
-							<img class="book-cover" src="" alt="book"/>
-							<p class="book-title"><?php echo $book->getTitle(); ?></p>
-						</h5>
-						<p class="book-author"><?php echo $book->getAuthor() ?></p>
-						<div class="price-area">
-							<span class="price-tag"></span>
-							&nbsp;
-							<p class="book-price"><?php echo $book->getPrice() ?>
-								TND</p>
+	{% block cartstyle %}
+        <link rel="stylesheet" href="{{ asset('styles/cart.css') }}"/>
+    {% endblock %}
+{% block body %}
+<header>
+	<div class="container text-center">
+		<div class="row">
+			<div class="col-md-7 col-sm-12 text-white">
+				<h6>PURCHASE NOW</h6>
+				<h1>SHOPPING CART</h1>
+				<p>
+					Pay For Your Books And Start Reading!
+				</p>
+				<p>
+					Total Price: <s><span id="total-price">{{ total }}</span> TND</s> &nbsp;&nbsp; 50% off
+				</p>
+				<button class="btn btn-light px-5 py-2 primary-btn" onclick="buy_now()">
+					Buy now for <span id="total-reduced-price">{{ (total / 2) }}</span> TND
+				</button>
+			</div>
+			<div class="col-md-5 col-sm-12">
+				<ul class="books-in-cart">
+					{% for e in data %}
+					<li class="cart-item">
+						<div class="book-img">
+							<img src="https://covers.openlibrary.org/b/olid/{{ e.book.cover }}-L.jpg" alt="Book"/>
 						</div>
-					</a>
-					<button class="btn-add-to-cart" id="" onclick="">Add to Cart &nbsp;
-						<span class="cart-tag"></span>
-					</button>
-				</div>
-
-				<div class="book-item">
-					<a href="../BookDetails/" class="fill-div">
-						<img class="book-cover" src="https://marketplace.canva.com/EAFPHUaBrFc/1/0/1003w/canva-black-and-white-modern-alone-story-book-cover-QHBKwQnsgzs.jpg" alt="book"/>
-						<p class="book-title">Book Title</p>
-					</h5>
-					<p class="book-author">Author</p>
-					<div class="price-area">
-						<span class="price-tag"></span>
-						&nbsp;
-						<p class="book-price">15.99 TND</p>
-					</div>
-				</a>
-				<button class="btn-add-to-cart">Add to Cart &nbsp;
-					<span class="cart-tag"></span>
-				</button>
+						<div class="book-description">
+							<div class="book-title">{{ e.book.title }}</div>
+							<div class="book-author">{{ e.book.author }}</div>
+							<div class="book-description">{{ e.book.description|slice(0, 40) }}...</div>
+							<div class="book-price"><span class="price-tag"></span><span class="price-text"><span class="price">{{ e.book.price }}</span> DT</span></div>
+						</div>
+						<div class="remove-icon">
+							<a href="{{ path('cart_remove', {'id': e.book.id}) }}" class="btn btn-danger">Remove</a>
+						</div>
+					</li>
+					{% endfor %}
+				</ul>
 			</div>
 		</div>
 	</div>
-	<button class="load-more-btn" id="first-btn" onclick="first_clicked('first-list')">
-		Load More
-	</button>
-</section>
-<img class="page-breaker" src="../assets/page-breaker-1.jpg"/>
-<section class="book-sec">
-	<h2 class="book-category">Learning is always a plus</h2>
-	<div class="container">
-		<div class="previous-list"></div>
-		<div class="book-list" id="second-list">
-
-			<div class="book-item">
-				<a href="">
-					<img class="book-cover" src="" alt="book"/>
-					<p class="book-title"><?php echo $book->getTitle(); ?></p>
-				</h5>
-				<p class="book-author"><?php echo $book->getAuthor() ?></p>
-				<div class="price-area">
-					<span class="price-tag"></span>
-					&nbsp;
-					<p class="book-price"><?php echo $book->getPrice() ?>
-						TND</p>
-				</div>
-			</a>
-			<button class="btn-add-to-cart">Add to Cart &nbsp;
-				<span class="cart-tag"></span>
-			</button>
-		</div>
-
-		<div class="book-item">
-			<a href="../BookDetails/" class="fill-div">
-				<img class="book-cover" src="https://marketplace.canva.com/EAFPHUaBrFc/1/0/1003w/canva-black-and-white-modern-alone-story-book-cover-QHBKwQnsgzs.jpg" alt="book"/>
-				<p class="book-title">Book Title</p>
-			</h5>
-			<p class="book-author">Author</p>
-			<div class="price-area">
-				<span class="price-tag"></span>
-				&nbsp;
-				<p class="book-price">15.99 TND</p>
-			</div>
-		</a>
-		<button class="btn-add-to-cart">Add to Cart &nbsp;
-			<span class="cart-tag"></span>
-		</button>
-		<button class="load-more-btn" id="first-btn" onclick="first_clicked('second-list')">Load More</button>
-	</section>
-    
-    <img class="page-breaker" src="../assets/page-breaker-2.jpg"/><section class="book-sec">
-		<h2 class="book-category">Buy One and Get 50% Off for The Second</h2>
-		<div class="container">
-			<div class="previous-list"></div>
-			<div class="book-list" id="third-list">
-
-				<div class="book-item">
-					<a href="">
-						<img class="book-cover" src="" alt="book"/>
-						<p class="book-title"><?php echo $book->getTitle(); ?></p>
-					</h5>
-					<p class="book-author"><?php echo $book->getAuthor() ?></p>
-					<div class="price-area">
-						<span class="price-tag"></span>
-						&nbsp;
-						<p class="book-price"><?php echo $book->getPrice() ?>
-							TND</p>
-					</div>
-				</a>
-				<button class="btn-add-to-cart">Add to Cart &nbsp;
-					<span class="cart-tag"></span>
-				</button>
-			</div>
-			<div class="book-item">
-				<a href="../BookDetails/" class="fill-div">
-					<img class="book-cover" src="https://marketplace.canva.com/EAFPHUaBrFc/1/0/1003w/canva-black-and-white-modern-alone-story-book-cover-QHBKwQnsgzs.jpg" alt="book"/>
-					<p class="book-title">Book Title</p>
-				</h5>
-				<p class="book-author">Author</p>
-				<div class="price-area">
-					<span class="price-tag"></span>
-					&nbsp;
-					<p class="book-price">15.99 TND</p>
-				</div>
-			</a>
-			<button class="btn-add-to-cart">Add to Cart &nbsp;
-				<span class="cart-tag"></span>
-			</button>
-		</div>
-	</div>
-</div>
-<button class="load-more-btn" id="first-btn" onclick="first_clicked('third-list')">Load More</button></section></main>{% endblock %}
+</header>
+{% endblock %}
