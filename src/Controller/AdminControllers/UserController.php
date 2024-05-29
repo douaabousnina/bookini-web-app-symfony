@@ -1,10 +1,6 @@
 <?php
 
 namespace App\Controller\AdminControllers;
-<<<<<<< HEAD
-=======
-
->>>>>>> 2641cd15d19fb82c1f64d97613166ccb172ad3cb
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManager;
