@@ -14,7 +14,9 @@ class OrderAdminController extends AbstractController
     public function index(OrderRepository $orderRepository): Response
     {
         $orders = $orderRepository->findAll();
-        return $this->render('AdminDashboard/orders.html.twig');
+        return $this->render('AdminDashboard/orders.html.twig', [
+            'orders' => $orders
+        ]);
     }
 
     #[Route('/addOrder', name: 'app_add_order_admin')]
