@@ -32,42 +32,48 @@
 			</thead>
 
 			<tbody>
+			{% for book in books %}
 				<tr>
 					<td>
-						<img class="book-cover" src=<?php echo '"https://covers.openlibrary.org/b/olid/' . $book['bcoverid'] . '-L.jpg"'; ?> alt="book"/>
+						{{book.getId()}}
 					</td>
 					<td>
-						<?= $book['bcoverid'] ?>
+						{{book.getBookTitle()}}
 					</td>
 					<td>
-						<?= $book['bid'] ?>
+						{{book.getBookAuthor()}}
 					</td>
 					<td>
-						<?= $book['btitle'] ?>
+						{{book.getBookPrice()}}
 					</td>
 					<td>
-						<?= $book['bdescription'] ?>
+						{{book.getBookPrice()}}
 					</td>
 					<td>
-						<?= $book['bauthor'] ?>
+						{{book.getBookDescription()}}
 					</td>
 					<td>
-						<?= $book['bprice'] ?>
+						{{book.getBookImage()}}
 					</td>
-					<td class="action-btns" style=" border:none;margin-left:10px; width:50px ; display: flex;">
-						<a class="edit-btn" href='updateBook.php?bid=<?= $book[' bid'] ?>'>
-							<span class="material-symbols-outlined">
-								edit
-							</span>
-						</a>
-
-						<a class="delete-btn" href="deleteBook.php?bid=<?= $book['bid'] ?>">
-							<span class="material-symbols-outlined">
-								delete
-							</span>
-						</a>
+					<td class="action-btns">
+						<div style="display: inline-flex;">
+							<button class="edit-btn" onclick="location.href='{{path('app_edit_book_admin', {'id' : book.getId()})}}'">
+										<span class="material-symbols-outlined">
+											edit
+										</span>
+							</button>
+							<form method="POST" action="{{path('app_delete_book_admin', {'id' : book.getId()})}}">
+								<button onclick="return confirm('Are you sure you want to delete this book')" type="submit" class="delete-btn" name="delete-book">
+											<span class="material-symbols-outlined">
+												delete
+											</span>
+								</button>
+							</form>
+						</div>
 					</td>
 				</tr>
+			{% endfor %}
+
 			</tbody>
 		</table>
 	</div>

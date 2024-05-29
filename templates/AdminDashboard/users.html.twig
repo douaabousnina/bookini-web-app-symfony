@@ -27,31 +27,42 @@
 					</tr>
 				</thead>
 				<tbody>
+				{% for user in users %}
+				<tr>
+					<td>
+						{{user.getId()}}
+					</td>
+					<td>
+						{{user.getUserFullname()}}
+					</td>
+					<td>
+						{{user.getUserEmail()}}
+					</td>
+					<td>
+						{{user.getRoles()}}
+					</td>
+					<td>
+						{{user.getPassword()}}
+					</td>
 
-					<tr>
-						<td><?= $client['cid'] ?></td>
-						<td><?= $client['firstname'] ?></td>
-						<td><?= $client['lastname'] ?></td>
-						<td><?= $client['email'] ?></td>
-						<td><?php echo $client['isAdmin']===0 ? "User" : "Admin" ; ?></td>
-						<td class="action-btns">
-							<div style="display: inline-flex;">
-								<button class="edit-btn" onclick="location.href='editClients.php?cid=<?= $client['cid'] ?>'">
-									<span class="material-symbols-outlined">
-										edit
-									</span>
-								</button>
-								<form method="POST" action="deleteclient.php">
-									<input type="hidden" name="cid" value="<?= $client['cid'] ?>">
-									<button onclick="return confirm('Are you sure you want to delete this client?')" type="submit" class="delete-btn" name="delete">
+					<td class="action-btns">
+						<div style="display: inline-flex;">
+							<button class="edit-btn" onclick="location.href='{{path('app_edit_user_admin', {'id' : user.getId()})}}'">
 										<span class="material-symbols-outlined">
-											delete
+											edit
 										</span>
-									</button>
-								</form>
-							</div>
-						</td>
-					</tr>
+							</button>
+							<form method="POST" action="{{path('app_delete_user_admin', {'id' : user.getId()})}}">
+								<button onclick="return confirm('Are you sure you want to delete this user')" type="submit" class="delete-btn" name="delete-user">
+											<span class="material-symbols-outlined">
+												delete
+											</span>
+								</button>
+							</form>
+						</div>
+					</td>
+				</tr>
+				{% endfor %}
 
 				</tbody>
 			</table>
