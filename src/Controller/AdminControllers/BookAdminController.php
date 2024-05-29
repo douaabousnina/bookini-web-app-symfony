@@ -8,6 +8,7 @@ use App\Repository\BookRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -22,6 +23,30 @@ class BookAdminController extends AbstractController
         return $this->render('AdminDashboard/books.html.twig', [
             'books' => $books
         ]);
+    }
+    #[Route('/addBook/admin', name: 'app_add_book_admin')]
+    public function new(Request $request, EntityManagerInterface $em): Response
+    {   $book=new Book();
+        $form = $this->createForm(BookType::class, $book);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $book->setBookPrice($form->get('book_price')->getData());
+            $book->setBookTitle($form->get('book_title')->getData());
+            $book->setBookAuthor($form->get('book_author')->getData());
+            $book->setBookImage($form->get('book_image')->getData());
+            $book->setBookDescription($form->get('book_description')->getData());
+            $em->flush();
+
+            $this->addFlash('success', 'Book added successfully!');
+
+            return $this->redirect('/adminBook');
+        }
+
+        return $this->render('AdminDashboard/addBook.html.twig', [
+            'form' => $form
+        ]);
+
     }
 
         #[Route('/editBook/{id}', name: 'app_edit_book_admin')]
