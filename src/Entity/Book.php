@@ -13,26 +13,26 @@ class Book
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private int $book_id ;
+    private int $book_id;
 
 
     #[ORM\Column(length: 180)]
     private string $book_title;
 
     #[ORM\Column(length: 255)]
-    private string $book_author ;
+    private string $book_author;
 
     #[ORM\Column]
-    private float $book_price ;
+    private float $book_price;
 
     #[ORM\Column]
     private int $book_stock;
 
     #[ORM\Column(length: 255)]
-    private string $book_image ;
+    private string $book_image;
 
     #[ORM\Column(length: 255)]
-    private string $book_description ;
+    private string $book_description;
 
     /**
      * @var Collection<int, OrderBook>
@@ -114,7 +114,8 @@ class Book
         $this->book_image = $book_image;
 
         return $this;
-    } public function getBookDescription(): ?string
+    }
+    public function getBookDescription(): ?string
     {
         return $this->book_description;
     }
@@ -155,8 +156,4 @@ class Book
 
         return $this;
     }
-
-
-
-
 }
