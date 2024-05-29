@@ -29,6 +29,8 @@ class OrderAdminController extends AbstractController
         ]);
     }
 
+    
+
     #[Route('/deleteOrder/{id}', name: 'app_delete_order_admin')]
     public function delete(OrderRepository $orderRepository, EntityManager $entityManager, int $id): Response
     {
