@@ -3,6 +3,7 @@
 namespace App\Controller\AdminControllers;
 
 use App\Repository\OrderRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,9 +30,11 @@ class OrderAdminController extends AbstractController
     }
 
     #[Route('/deleteOrder/{id}', name: 'app_delete_order_admin')]
-    public function delete(OrderRepository $orderRepository, int $id): Response
+    public function delete(OrderRepository $orderRepository,EntityManager $entityManager, int $id): Response
     {
-        
+        $order = $orderRepository->find($id);
+        $entityManager->remove($order);
+        $entityManager->flush();
         return $this->redirect('/adminOrder');
     }
 }
