@@ -12,30 +12,17 @@
 		<h3>Go back</h3>
 	</a>
 
-
-	<form class="edit-book" method="post">
-		<ul style="position:absolute; margin-top: 100px; left: 80%;">
-			<?= $errors ?>
-		</ul>
-		<label for="bid">ID:</label>
-		<input type="text" name="bid" placeholder="ID">
-
-		<label for="bcoverid">Cover ID:</label>
-		<input type="text" name="bcoverid" placeholder="Cover ID">
-
-		<label for="btitle">Title:</label>
-		<input type="text" name="btitle" placeholder="Title">
-
-		<label for="bdescription">Description:</label>
-		<input type="text" name="bdescription" placeholder="Description">
-
-		<label for="bauthor">Author:</label>
-		<input type="text" name="bauthor" placeholder="Author">
-
-		<label for="bprice">Price:</label>
-		<input type="text" name="bprice" placeholder="Price">
-
-
-		<button type="submit">Add book</button>
-	</form>
+	<div class="edit-book">
+		<h1>Add Book</h1>
+		{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+		{{ form_errors(form) }}
+		{{ form_row(form.bid, {'attr': {'class': 'form-control'}}) }}
+		{{ form_row(form.btitle, {'attr': {'class': 'form-control'}}) }}
+		{{ form_row(form.bprice, {'attr': {'class': 'form-control'}}) }}
+		{{ form_row(form.bdescription, {'attr': {'class': 'form-control'}}) }}
+		{{ form_row(form.bcoverid, {'attr': {'class': 'form-control'}}) }}
+		{{ form_row(form.bauthor, {'attr': {'class': 'form-control'}}) }}
+		<button type="submit" class="btn btn-success">Add Book</button>
+		{{ form_end(form) }}
+	</div>
 {% endblock %}
