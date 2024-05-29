@@ -1,0 +1,37 @@
+{% extends '/AdminDashboard/base.html.twig' %}
+
+{% block title %}
+    Edit User (+ user_name / user_id)
+{% endblock %}
+
+{% block content %}
+	<main>
+		<a href="clients.php" class="go-back">
+			<span class="material-symbols-outlined">
+				arrow_back
+			</span>
+			<h3>Go back</h3>
+		</a>
+		<form class="edit-book" action="updateclient.php" method="POST">
+			<input type="hidden" name="cid" value="<?php echo $arr['cid']; ?>">
+
+			<label for="firstname">Firstname</label>
+			<input type="text" id="firstname" name="firstname" value="<?php echo htmlspecialchars($arr['firstname']); ?>">
+
+			<label for="lastname">Lastname</label>
+			<input type="text" id="lastname" name="lastname" value="<?php echo htmlspecialchars($arr['lastname']); ?>">
+
+			<label for="email">Email</label>
+			<input type="text" id="email" name="email" value="<?php echo htmlspecialchars($arr['email']); ?>">
+
+			<label for="role">Role</label>
+			<select name="role" id="role">
+				<option selected disabled>Role</option>
+				{# <option value="user" <?= $arr['isAdmin'] === 0 ? 'selected' : '' ?>>User</option>
+				   <option value="admin" <?= $arr['isAdmin'] === 1 ? 'selected' : '' ?>>Admin</option> #}
+			</select>
+
+			<button type="submit" name="submit">Submit changes</button>
+		</form>
+	</main>
+{% endblock %}
