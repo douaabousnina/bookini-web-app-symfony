@@ -50,24 +50,24 @@ class OrderBook
 
     public function getOrderId(): ?Order
     {
-        return $this->orderId;
+        return $this->order_id;
     }
 
-    public function setOrderId(?Order $orderId): static
+    public function setOrderId(?Order $order_id): static
     {
-        $this->orderId = $orderId;
+        $this->order_id = $order_id;
 
         return $this;
     }
 
     public function getBookID(): ?Book
     {
-        return $this->bookID;
+        return $this->book_id;
     }
 
-    public function setBookID(?Book $bookID): static
+    public function setBookID(?Book $book_id): static
     {
-        $this->bookID = $bookID;
+        $this->book_id = $book_id;
 
         return $this;
     }
