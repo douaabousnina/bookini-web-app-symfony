@@ -7,33 +7,19 @@
 {% block content %}
 	<main>
 
-		<a href="orders.php" class="go-back">
+		<a href="{{path('app_order_admin')}}" class="go-back">
 			<span class="material-symbols-outlined">
 				arrow_back
 			</span>
 			<h3>Go back</h3>
 		</a>
 
-		<form class="edit-book" action="update.php" method="POST">
-			<label for="cid">Client ID:</label>
-			<input type="text" id="cid" name="cid" value="<?= $arr['cid'] ?>" readonly/><br/>
-
-			<label for="bid">Book ID:</label>
-			<input type="text" id="bid" name="bid" value="<?= $arr['bid'] ?>" readonly><br/>
-
-			<label for="cdate">Order Date:</label>
-			<input type="date" id="cdate" name="cdate" value="<?= $arr['cdate'] ?>"><br/>
-
-			<label for="state">Status:</label>
-			<select id="state" name="state" placeholder="Update Status"><br/>
-				<option value="Pending">Pending</option>
-				{# <option value="Processing">Processing</option>
-				   <option value="Delivered">Delivered</option> #}
-			</select>
-
-			<button type="submit">Submit changes</button>
-
-		</form>
+		{{ form_start(form, {'attr': {'class': 'edit-book'}}) }}
+		{{ form_errors(form) }}
+		{{ form_row(form.order_total_amount, {'attr': {'class': 'form-control'}}) }}
+		{{ form_row(form.order_date, {'attr': {'class': 'form-control'}}) }}
+		<button type="submit" class="btn btn-success">Update Order</button>
+		{{ form_end(form) }}
 
 	</main>
 {% endblock %}
