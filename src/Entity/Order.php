@@ -55,12 +55,12 @@ class Order
 
     public function getUserId(): ?User
     {
-        return $this->user_id;
+        return $this->id;
     }
 
-    public function setUserId(?User $user_id): static
+    public function setUserId(?User $id): static
     {
-        $this->user_id = $user_id;
+        $this->id = $id;
 
         return $this;
     }
