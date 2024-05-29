@@ -34,4 +34,9 @@ class BookController extends AbstractController
     {
         return new Response('<div>Hello World</div>');
     }
+    #[Route('/faq', name: 'app_faq')]
+    public function faq(): Response
+    {
+        return $this->render('UserInterface/faq.html.twig');
+    }
 }
