@@ -218,11 +218,13 @@ aside .sidebar a:hover {
 aside .sidebar a:hover span {
   margin-left: 0.6rem;
   text-decoration: none;
+
 }
 
 main {
   margin-top: 2.4rem;
   width: 170vh;
+
 }
 
 main .home {
@@ -776,6 +778,9 @@ a {
   align-items: center; */
   display: flex;
   flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  
   margin-top: 12px;
   margin-bottom: 10px;
   transition: 0.2s;
