@@ -13,7 +13,7 @@ class Book
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private int $id;
+    private int $book_id;
 
 
     #[ORM\Column(length: 180)]
@@ -43,7 +43,7 @@ class Book
 
     public function getId(): ?int
     {
-        return $this->id;
+        return $this->book_id;
     }
 
     public function getBookTitle(): ?string
