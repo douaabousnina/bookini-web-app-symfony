@@ -25,7 +25,7 @@ class CartController extends AbstractController
                 'book'=>$book,
                 'quantite'=>1
             ];
-            $total += $book->getBookPrice();
+            $total += $book->getbook_price();
         }
         return $this->render('UserInterface/cart.html.twig',compact('data','total'));
     }

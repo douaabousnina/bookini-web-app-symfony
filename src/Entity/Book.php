@@ -29,67 +29,81 @@ class Book
     #[ORM\Column(length: 255)]
     private ?string $book_image = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $book_description = null;
+
     public function getId(): ?int
     {
         return $this->book_id;
     }
 
-    public function getBookTitle(): ?string
+    public function getbook_title(): ?string
     {
         return $this->book_title;
     }
 
-    public function setBookTitle(string $book_title): static
+    public function setbook_title(string $book_title): static
     {
         $this->book_title = $book_title;
 
         return $this;
     }
 
-    public function getBookAuthor(): ?string
+    public function getbook_author(): ?string
     {
         return $this->book_author;
     }
 
-    public function setBookAuthor(string $book_author): static
+    public function setbook_author(string $book_author): static
     {
         $this->book_author = $book_author;
 
         return $this;
     }
 
-    public function getBookPrice(): ?float
+    public function getbook_price(): ?float
     {
         return $this->book_price;
     }
 
-    public function setBookPrice(float $book_price): static
+    public function setbook_price(float $book_price): static
     {
         $this->book_price = $book_price;
 
         return $this;
     }
 
-    public function getBookStock(): ?int
+    public function getbook_stock(): ?int
     {
         return $this->book_stock;
     }
 
-    public function setBookStock(int $book_stock): static
+    public function setbook_stock(int $book_stock): static
     {
         $this->book_stock = $book_stock;
 
         return $this;
     }
 
-    public function getBookImage(): ?string
+    public function getbook_image(): ?string
     {
         return $this->book_image;
     }
 
-    public function setBookImage(string $book_image): static
+    public function setbook_image(string $book_image): static
     {
         $this->book_image = $book_image;
+
+        return $this;
+    }
+    public function getbook_description(): ?string
+    {
+        return $this->book_description;
+    }
+
+    public function setbook_description(string $book_description): static
+    {
+        $this->book_description = $book_description;
 
         return $this;
     }

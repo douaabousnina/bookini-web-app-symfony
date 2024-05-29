@@ -3,9 +3,7 @@
 {% block title %}
 	Cart
 {% endblock %}
-	{% block cartstyle %}
-        <link rel="stylesheet" href="{{ asset('styles/cart.css') }}"/>
-    {% endblock %}
+
 {% block body %}
 <header>
 	<div class="container text-center">
@@ -28,16 +26,16 @@
 					{% for e in data %}
 					<li class="cart-item">
 						<div class="book-img">
-							<img src="https://covers.openlibrary.org/b/olid/{{ e.book.cover }}-L.jpg" alt="Book"/>
+							<img src="{{ asset(e.book.book_image) }}" alt="Book"/>
 						</div>
 						<div class="book-description">
-							<div class="book-title">{{ e.book.title }}</div>
-							<div class="book-author">{{ e.book.author }}</div>
-							<div class="book-description">{{ e.book.description|slice(0, 40) }}...</div>
-							<div class="book-price"><span class="price-tag"></span><span class="price-text"><span class="price">{{ e.book.price }}</span> DT</span></div>
+							<div class="book-title">{{ e.book.book_title }}</div>
+							<div class="book-author">{{ e.book.book_author }}</div>
+							<div class="book-description">{{ e.book.book_description|slice(0, 40) }}...</div>
+							<div class="book-price"><span class="price-tag"></span><span class="price-text"><span class="price">{{ e.book.book_price }}</span> DT</span></div>
 						</div>
 						<div class="remove-icon">
-							<a href="{{ path('cart_remove', {'id': e.book.id}) }}" class="btn btn-danger">Remove</a>
+							<a href="{{ path('cart_remove', {'id': e.book.id}) }}" class="btn btn-danger">x</a>						
 						</div>
 					</li>
 					{% endfor %}
