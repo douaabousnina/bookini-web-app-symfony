@@ -34,13 +34,6 @@ class Book
     #[ORM\Column(length: 255)]
     private string $book_description;
 
-    /**
-     * @var Collection<int, OrderBook>
-     */
-
-
-
-
     public function getId(): ?int
     {
         return $this->book_id;
