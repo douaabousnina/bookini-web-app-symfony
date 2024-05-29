@@ -1,18 +1,10 @@
-<<<<<<< HEAD
-<!DOCTYPE html>
+{% extends '/UserInterface/base.html.twig' %}
 
-<title>Register</title>
-=======
-{% extends 'UserInterface/base.html.twig' %}
-
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('styles/Register.css') }}"/>
+{% block title %}
+    Register
 {% endblock %}
 
-{% block title %} Register {% endblock %}
->>>>>>> feature/iheb
-
-{% block body %}
+{% block content %}
     {% for flash_error in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
@@ -22,33 +14,12 @@
     {{ form_errors(registrationForm) }}
 
     {{ form_start(registrationForm) }}
-<<<<<<< HEAD
-        {{ form_row(registrationForm.user_id) }}
+        {{ form_row(registrationForm.user_email) }}
+        {{ form_row(registrationForm.user_fullname) }}
         {{ form_row(registrationForm.plainPassword, {
             label: 'Password'
         }) }}
         {{ form_row(registrationForm.agreeTerms) }}
-=======
-
-        {#{ form_row(registrationForm.id,
-            {label: 'User ID:'})
-        }#}
-        {{ form_row(registrationForm.user_email, {
-            label: 'Email:'
-        }) }}
-        {{ form_row(registrationForm.user_fullname, {
-            label: 'Full Name:'
-        }) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password:'
-        }) }}
-        {#{ form_row(registrationForm.roles, {
-            label: 'Roles:'
-        }) }#}
-        {{ form_row(registrationForm.agreeTerms, {
-            label: 'I have read and agree to the terms of service\n:'
-        })  }}
->>>>>>> feature/iheb
 
         <button type="submit" class="btn">Register</button>
     {{ form_end(registrationForm) }}
