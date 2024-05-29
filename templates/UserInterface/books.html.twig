@@ -1,12 +1,11 @@
-{% extends 'base.html.twig' %}
+{% extends 'UserInterface/base.html.twig' %}
 
 {% block title %}
-	Books
+    Books
 {% endblock %}
 
 {% block content %}
-
-	<div class="container text-center">
+    <div class="container text-center">
 		<div class="row">
 			<div class="col-md-7 col-sm-12  text-white">
 				<h6>TEAM RT2</h6>
@@ -21,131 +20,68 @@
 		</div>
 	</div>
 
-	<main>
-		<!--Scientific Books-->
-		<section class="book-sec">
-			<h2 class="book-category">Search, Read, And Purchase</h2>
-			<div class="container">
-				<div class="previous-list"></div>
-				<div class="book-list" id="first-list">
-					<div class="book-item" id=<?php echo '"book' . $book-> getisbn() . '"' ?>>
-						<a href=<?php echo '"../BookDetails/?id=' . $book-> getisbn() . '"' ?>class="fill-div">
-							<img class="book-cover" src=<?php echo '"https://covers.openlibrary.org/b/olid/' . $book-> getcover() . '-L.jpg"' ; ?>
-							alt="book" />
-							<p class="book-title"><?php echo $book->getTitle(); ?></p>
-						</h5>
-						<p class="book-author"><?php echo $book->getAuthor() ?></p>
-						<div class="price-area">
-							<span class="price-tag"></span>
-							&nbsp;
-							<p class="book-price"><?php echo $book->getPrice() ?>
-								TND</p>
-						</div>
-					</a>
-					<button class="btn-add-to-cart" id="" onclick="">Add to Cart &nbsp;
-						<span class="cart-tag"></span>
-					</button>
-				</div>
+    <main>
+        <!-- Scientific Books Section -->
+        <section class="book-sec">
+            <h2 class="book-category">Search, Read, And Purchase</h2>
+            <div class="container">
+                <div class="book-list" id="book-list">
+                    {% for book in books %}
+                        <div class="book-item">
+                            <a href="{{ path('app_book_details', {'id': book.id}) }}" class="fill-div">
+                                <img class="book-cover" src="{{ book.book_image }}" alt="book" />
+                                <p class="book-title">{{ book.book_title }}</p>
+                                <p class="book-author">{{ book.book_author }}</p>
+                                <div class="price-area">
+                                    <p class="book-price">{{ book.book_price }} TND</p>
+                                </div>
+                            </a>
+                            <button class="btn-add-to-cart">Add to Cart</button>
+                        </div>
+                    {% endfor %}
+                </div>
+                <button class="load-more-btn" id="load-more-btn" data-page="1">Load More</button>
+            </div>
+        </section>
+    </main>
 
-				<div class="book-item">
-					<a href="../BookDetails/" class="fill-div">
-						<img class="book-cover" src="https://marketplace.canva.com/EAFPHUaBrFc/1/0/1003w/canva-black-and-white-modern-alone-story-book-cover-QHBKwQnsgzs.jpg" alt="book"/>
-						<p class="book-title">Book Title</p>
-					</h5>
-					<p class="book-author">Author</p>
-					<div class="price-area">
-						<span class="price-tag"></span>
-						&nbsp;
-						<p class="book-price">15.99 TND</p>
-					</div>
-				</a>
-				<button class="btn-add-to-cart">Add to Cart &nbsp;
-					<span class="cart-tag"></span>
-				</button>
-			</div>
-		</div>
-	</div>
-	<button class="load-more-btn" id="first-btn" onclick="first_clicked('first-list')">
-		Load More
-	</button>
-</section>
-<img class="page-breaker" src="../assets/page-breaker-1.jpg"/>
-<section class="book-sec">
-	<h2 class="book-category">Learning is always a plus</h2>
-	<div class="container">
-		<div class="previous-list"></div>
-		<div class="book-list" id="second-list">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var loadMoreBtn = document.getElementById('load-more-btn');
+            var bookList = document.getElementById('book-list');
+            var currentPage = parseInt(loadMoreBtn.getAttribute('data-page'));
 
-			<div class="book-item">
-				<a href=<?php echo '"../BookDetails/?id=' . $book-> getisbn() . '"' ?>class="fill-div">
-					<img class="book-cover" src=<?php echo '"https://covers.openlibrary.org/b/olid/' . $book-> getcover() . '-L.jpg"' ; ?>
-					alt="book" />
-					<p class="book-title"><?php echo $book->getTitle(); ?></p>
-				</h5>
-				<p class="book-author"><?php echo $book->getAuthor() ?></p>
-				<div class="price-area">
-					<span class="price-tag"></span>
-					&nbsp;
-					<p class="book-price"><?php echo $book->getPrice() ?>
-						TND</p>
-				</div>
-			</a>
-			<button class="btn-add-to-cart">Add to Cart &nbsp;
-				<span class="cart-tag"></span>
-			</button>
-		</div>
-
-		<div class="book-item">
-			<a href="../BookDetails/" class="fill-div">
-				<img class="book-cover" src="https://marketplace.canva.com/EAFPHUaBrFc/1/0/1003w/canva-black-and-white-modern-alone-story-book-cover-QHBKwQnsgzs.jpg" alt="book"/>
-				<p class="book-title">Book Title</p>
-			</h5>
-			<p class="book-author">Author</p>
-			<div class="price-area">
-				<span class="price-tag"></span>
-				&nbsp;
-				<p class="book-price">15.99 TND</p>
-			</div>
-		</a>
-		<button class="btn-add-to-cart">Add to Cart &nbsp;
-			<span class="cart-tag"></span>
-		</button>
-	</div>
-</div></div><button class="load-more-btn" id="first-btn" onclick="first_clicked('second-list')">
-Load More</button></section><img class="page-breaker" src="../assets/page-breaker-2.jpg"/><section class="book-sec"><h2 class="book-category">Buy One and Get 50% Off for The Second</h2><div class="container">
-<div class="previous-list"></div>
-<div class="book-list" id="third-list">
-	<div class="book-item">
-		<a href=<?php echo '"../BookDetails/?id=' . $book-> getisbn() . '"' ?>class="fill-div">
-			<img class="book-cover" src=<?php echo '"https://covers.openlibrary.org/b/olid/' . $book-> getcover() . '-L.jpg"' ; ?>
-			alt="book" />
-			<p class="book-title"><?php echo $book->getTitle(); ?></p>
-		</h5>
-		<p class="book-author"><?php echo $book->getAuthor() ?></p>
-		<div class="price-area">
-			<span class="price-tag"></span>
-			&nbsp;
-			<p class="book-price"><?php echo $book->getPrice() ?>
-				TND</p>
-		</div>
-	</a>
-	<button class="btn-add-to-cart">Add to Cart &nbsp;
-		<span class="cart-tag"></span>
-	</button>
-</div>
-
-<div class="book-item">
-	<a href="../BookDetails/" class="fill-div">
-		<img class="book-cover" src="https://marketplace.canva.com/EAFPHUaBrFc/1/0/1003w/canva-black-and-white-modern-alone-story-book-cover-QHBKwQnsgzs.jpg" alt="book"/>
-		<p class="book-title">Book Title</p>
-	</h5>
-	<p class="book-author">Author</p>
-	<div class="price-area">
-		<span class="price-tag"></span>
-		&nbsp;
-		<p class="book-price">15.99 TND</p>
-	</div>
-</a>
-<button class="btn-add-to-cart">Add to Cart &nbsp;
-	<span class="cart-tag"></span>
-</button></div></div></div><button class="load-more-btn" id="first-btn" onclick="first_clicked('third-list')">Load More</button></section></main>{% endblock %}
+            loadMoreBtn.addEventListener('click', function() {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', '/books?page=' + (currentPage + 1), true);
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        if (response.books.length > 0) {
+                            currentPage++;
+                            response.books.forEach(function(book) {
+                                var bookItem = document.createElement('div');
+                                bookItem.classList.add('book-item');
+                                bookItem.innerHTML = `
+                                    <a href="/book/${book.id}" class="fill-div">
+                                        <img class="book-cover" src="${book.book_image}" alt="book" />
+                                        <p class="book-title">${book.book_title}</p>
+                                        <p class="book-author">${book.book_author}</p>
+                                        <div class="price-area">
+                                            <p class="book-price">${book.book_price} TND</p>
+                                        </div>
+                                    </a>
+                                    <button class="btn-add-to-cart">Add to Cart</button>
+                                `;
+                                bookList.appendChild(bookItem);
+                            });
+                        } else {
+                            loadMoreBtn.style.display = 'none';
+                        }
+                    }
+                };
+                xhr.send();
+            });
+        });
+    </script>
+{% endblock %}
