@@ -25,7 +25,7 @@ class CartController extends AbstractController
                 'book'=>$book,
                 'quantite'=>1
             ];
-            $total += $book->getBookPrice();
+            $total += $book->getbook_price();
         }
         return $this->render('UserInterface/cart.html.twig',compact('data','total'));
     }
@@ -56,4 +56,11 @@ class CartController extends AbstractController
 
         return $this->redirectToRoute('cart_index');
     }
+    #[Route('/buy',name:'buy')]
+    public function buy(SessionInterface $session, ){
+    $session->remove('cart');
+    $this->addFlash('success', 'Your order has been placed successfully!');
+    return $this->redirectToRoute('cart_index');
+
+}
 }
