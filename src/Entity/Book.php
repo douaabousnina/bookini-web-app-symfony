@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\BookRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: BookRepository::class)]
@@ -11,23 +13,43 @@ class Book
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $book_id = null;
+    private int $book_id ;
 
 
     #[ORM\Column(length: 180)]
-    private ?string $book_title = null;
+    private string $book_title;
 
     #[ORM\Column(length: 255)]
-    private ?string $book_author = null;
+    private string $book_author ;
 
     #[ORM\Column]
-    private ?float $book_price = null;
+    private float $book_price ;
 
     #[ORM\Column]
-    private ?int $book_stock = null;
+    private int $book_stock;
 
     #[ORM\Column(length: 255)]
-    private ?string $book_image = null;
+    private string $book_image ;
+
+    #[ORM\Column(length: 255)]
+    private string $book_description ;
+
+    /**
+     * @var Collection<int, OrderBook>
+     */
+    #[ORM\OneToMany(targetEntity: OrderBook::class, mappedBy: 'bookID')]
+    private Collection $orderBooks;
+
+    public function __construct()
+    {
+        $this->orderBooks = new ArrayCollection();
+    }
+
+
+
+
+
+
 
     public function getId(): ?int
     {
@@ -92,5 +114,49 @@ class Book
         $this->book_image = $book_image;
 
         return $this;
+    } public function getBookDescription(): ?string
+    {
+        return $this->book_description;
     }
+
+    public function setBookDescription(string $book_description): static
+    {
+        $this->book_description = $book_description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, OrderBook>
+     */
+    public function getOrderBooks(): Collection
+    {
+        return $this->orderBooks;
+    }
+
+    public function addOrderBook(OrderBook $orderBook): static
+    {
+        if (!$this->orderBooks->contains($orderBook)) {
+            $this->orderBooks->add($orderBook);
+            $orderBook->setBookID($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrderBook(OrderBook $orderBook): static
+    {
+        if ($this->orderBooks->removeElement($orderBook)) {
+            // set the owning side to null (unless already changed)
+            if ($orderBook->getBookID() === $this) {
+                $orderBook->setBookID(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+
+
 }
