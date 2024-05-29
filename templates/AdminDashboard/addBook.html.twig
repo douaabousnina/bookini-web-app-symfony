@@ -12,17 +12,17 @@
 		<h3>Go back</h3>
 	</a>
 
-	<div class="edit-book">
+
 		<h1>Add Book</h1>
 		{{ form_start(form, {'attr': {'class': 'edit-book'}}) }}
 		{{ form_errors(form) }}
-		{{ form_row(form.bid, {'attr': {'class': 'edit-book'}}) }}
-		{{ form_row(form.btitle, {'attr': {'class': 'edit-book'}}) }}
-		{{ form_row(form.bprice, {'attr': {'class': 'edit-book'}}) }}
-		{{ form_row(form.bdescription, {'attr': {'class': 'edit-book'}}) }}
-		{{ form_row(form.bcoverid, {'attr': {'class': 'edit-book'}}) }}
-		{{ form_row(form.bauthor, {'attr': {'class': 'edit-book'}}) }}
+		{{ form_row(form.book_id, {'attr': {'class': 'form-control'}}) }}
+		{{ form_row(form.book_title, {'attr': {'class': 'form-control'}}) }}
+		{{ form_row(form.book_price, {'attr': {'class': 'form-control'}}) }}
+		{{ form_row(form.book_description, {'attr': {'class': 'form-control'}}) }}
+		{{ form_row(form.book_image, {'attr': {'class': 'form-control'}}) }}
+		{{ form_row(form.book_author, {'attr': {'class': 'form-control'}}) }}
 		<button type="submit" class="btn btn-success">Add Book</button>
 		{{ form_end(form) }}
-	</div>
+
 {% endblock %}

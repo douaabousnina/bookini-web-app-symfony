@@ -3,98 +3,63 @@
 namespace App\Controller\AdminControllers;
 
 use App\Entity\Book;
+use App\Form\BookType;
+use App\Repository\BookRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 
 class BookAdminController extends AbstractController
-{    #[Route('/addBook/admin', name: 'add_book')]
+{    #[Route('/Books/admin', name: 'books')]
 
-    public function new(Request $request, EntityManagerInterface $em): Response
+    public function index(BookRepository $bookRepository): Response
     {
-        $book = new Book();
-        $form = $this->createForm(BookF::class, $book);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            /** @var UploadedFile $imageFile */
-            $imageFile = $form->get('image')->getData();
-
-            if ($imageFile) {
-                $newFilename = uniqid().'.'.$imageFile->guessExtension();
-                try {
-                    $imageFile->move(
-                        $this->getParameter('images_directory'),
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    // Handle exception
-                }
-                $book->setImage($newFilename);
-            }
-
-            $em->persist($book);
-            $em->flush();
-
-            return $this->redirectToRoute('AdminDashboard/books.html.twig');
-        }
-
-        return $this->render('AdminDashboard/addBook.html.twig', [
-            'form' => $form->createView(),
+        $books = $bookRepository->findAll();
+        return $this->render('AdminDashboard/books.html.twig', [
+            'books' => $books
         ]);
     }
 
-    #[Route('/editBook/admin/{id}', name: 'edit_book_admin')]
-    public function edit(Request $request, Book $book, EntityManagerInterface $em): Response
-    {
-        $form = $this->createForm(Book::class, $book);
+        #[Route('/editBook/{id}', name: 'app_edit_book_admin')]
+        public function edit(BookRepository $bookRepository, int $id,Request $request, EntityManagerInterface $entityManager): Response
+        {
+            $book = $bookRepository->find($id);
+            $form = $this->createForm(BookType::class, $book);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
 
-        $form->handleRequest($request);
+                $book->setBookPrice($form->get('book_price')->getData());
+                $book->setBookTitle($form->get('book_title')->getData());
+                $book->setBookAuthor($form->get('book_author')->getData());
+                $book->setBookImage($form->get('book_image')->getData());
+                $book->setBookDescription($form->get('book_description')->getData());
+                $entityManager->flush();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            /** @var UploadedFile $imageFile */
-            $imageFile = $form->get('image')->getData();
+                $this->addFlash('success', 'Book updated successfully!');
 
-            if ($imageFile) {
-                $newFilename = uniqid().'.'.$imageFile->guessExtension();
-                try {
-                    $imageFile->move(
-                        $this->getParameter('images_directory'),
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    // Handle exception
-                }
-                $book->setImage($newFilename);
+                return $this->redirect('/adminBook');
             }
 
-            $em->flush();
-
-            return $this->redirectToRoute('AdminDashboard/books.html.twig');
+            return $this->render('AdminDashboard/editBook.html.twig', [
+                'form' => $form
+            ]);
         }
 
-        return $this->render('AdminDashboard/editBook.html.twig', [
-            'form' => $form->createView(),
-            'book' => $book,
-        ]);
-    }
 
-    #[Route('/admin/deleteBook/{id}', name: 'book_delete', methods: ['POST'])]
-    public function delete(Request $request, Book $book, EntityManagerInterface $em): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$book->getId(), $request->request->get('_token'))) {
-            $em->remove($book);
-            $em->flush();
+
+        #[Route('/deleteBook/{id}', name: 'app_delete_book_admin')]
+        public function delete(BookRepository $bookRepository, EntityManager $entityManager, int $id): Response
+        {
+            $book = $bookRepository->find($id);
+            $entityManager->remove($book);
+            $entityManager->flush();
+            $this->addFlash('success', 'Book deleted successfully!');
+            return $this->redirect('/Books/admin');
         }
-
-        return $this->redirectToRoute('AdminDashboard/books.html.twig');
     }
-}
 
 

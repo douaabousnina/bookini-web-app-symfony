@@ -12,26 +12,16 @@
     {# <?= $errors ?> #}
 </ul>
 
+    <h1>Edit Book</h1>
+    {{ form_start(form, {'attr': {'class': 'edit-book'}}) }}
+    {{ form_errors(form) }}
+    {{ form_row(form.book_id, {'attr': {'class': 'form-control'}}) }}
+    {{ form_row(form.book_title, {'attr': {'class': 'form-control'}}) }}
+    {{ form_row(form.book_price, {'attr': {'class': 'form-control'}}) }}
+    {{ form_row(form.book_description, {'attr': {'class': 'form-control'}}) }}
+    {{ form_row(form.book_image, {'attr': {'class': 'form-control'}}) }}
+    {{ form_row(form.book_author, {'attr': {'class': 'form-control'}}) }}
+    <button type="submit" class="btn btn-success">Edit Book</button>
+    {{ form_end(form) }}
 
-<form class="edit-book" method="post" action="updateBook.php?bid=<?= $book['bid'] ?>">
 
-    <label for="bid">ID:</label>
-    <input type="text" name="bid" value="<?= $book['bid'] ?>">
-
-    <label for="bcoverid">Cover ID:</label>
-    <input type="text" name="bcoverid" value="<?= $book['bcoverid'] ?>">
-
-    <label for="btitle">Title:</label>
-    <input type="text" name="btitle" value="<?= $book['btitle'] ?>">
-
-    <label for="bdescription">Description:</label>
-    <input type="text" name="bdescription" value="<?= $book['bdescription'] ?>">
-
-    <label for="bauthor">Author:</label>
-    <input type="text" name="bauthor" value="<?= $book['bauthor'] ?>">
-
-    <label for="bprice">Price:</label>
-    <input type="text" name="bprice" value="<?= $book['bprice'] ?>">
-
-    <button type="submit" name="update-btn">Submit changes</button>
-</form>

@@ -1,12 +1,10 @@
 <?php
 
 namespace App\Controller\AdminControllers;
-use App\Entity\User;
+use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -14,33 +12,46 @@ use Symfony\Component\Routing\Attribute\Route;
 class UserController extends AbstractController
 {
 
-    #[Route('/editUser/admin/{id}', name: 'edit_user')]
-    public function edit(Request $request, User $user, EntityManagerInterface $em): Response
+    #[Route('/adminUsers', name: 'app_users_admin')]
+    public function index(UserRepository $userRepository): Response
     {
-        $form = $this->createForm(User::class, $user);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $em->flush();
-            return $this->redirectToRoute('AdminDashboard/editUser.html.twig');
-        }
-
+        $user = $userRepository->findAll();
         return $this->render('AdminDashboard/users.html.twig', [
-            'form' => $form->createView(),
-            'user' => $user,
+            'users' => $user
         ]);
     }
 
-    #[Route('/admin/deleteUser/{id}', name: 'user_delete', methods: ['POST'])]
-    public function delete(Request $request, User $user, EntityManagerInterface $em): Response
+    #[Route('/editUser/{id}', name: 'app_edit_user_admin')]
+    public function edit(userRepository $userRepository, int $id,Request $request, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
-            $em->remove($user);
-            $em->flush();
+        $user = $userRepository->find($id);
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $user->setUserFullname($form->get('user_fullname')->getData());
+            $user->setUserEmail($form->get('user_email')->getData());
+            $entityManager->flush();
+
+            $this->addFlash('success', 'User updated successfully!');
+
+            return $this->redirect('/adminUsers');
         }
 
-        return $this->redirectToRoute('AdminDashboard/users.html.twig');
+        return $this->render('AdminDashboard/editUser.html.twig', [
+            'form' => $form
+        ]);
+    }
+
+
+
+    #[Route('/deleteUser/{id}', name: 'app_delete_user_admin')]
+    public function delete(userRepository $userRepository, EntityManager $entityManager, int $id): Response
+    {
+        $user = $userRepository->find($id);
+        $entityManager->remove($user);
+        $entityManager->flush();
+        $this->addFlash('success', 'User deleted successfully!');
+        return $this->redirect('/adminUsers');
     }
 }
