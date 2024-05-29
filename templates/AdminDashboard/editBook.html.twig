@@ -1,27 +1,28 @@
-<a href="books.php" class="go-back">
-    <span class="material-symbols-outlined">
-        arrow_back
-    </span>
-    <h3>Go back</h3>
-</a>
+{% extends '/AdminDashboard/base.html.twig' %}
 
-<ul style="position: absolute;
-            margin-top: 100px;
-            left: 80%;">
-    offfff
-    {# <?= $errors ?> #}
-</ul>
+{% block title %}
+	Edit book
+{% endblock %}
 
-    <h1>Edit Book</h1>
-    {{ form_start(form, {'attr': {'class': 'edit-book'}}) }}
-    {{ form_errors(form) }}
-    {{ form_row(form.book_id, {'attr': {'class': 'form-control'}}) }}
-    {{ form_row(form.book_title, {'attr': {'class': 'form-control'}}) }}
-    {{ form_row(form.book_price, {'attr': {'class': 'form-control'}}) }}
-    {{ form_row(form.book_description, {'attr': {'class': 'form-control'}}) }}
-    {{ form_row(form.book_image, {'attr': {'class': 'form-control'}}) }}
-    {{ form_row(form.book_author, {'attr': {'class': 'form-control'}}) }}
-    <button type="submit" class="btn btn-success">Edit Book</button>
-    {{ form_end(form) }}
+{% block content %}
+	<main>
+		<a href="books.php" class="go-back">
+			<span class="material-symbols-outlined">
+				arrow_back
+			</span>
+			<h3>Go back</h3>
+		</a>
 
+		<h1>Edit Book</h1>
+		{{ form_start(form, {'attr': {'class': 'edit-book'}}) }}
+		{{ form_errors(form) }}
+		{{ form_row(form.book_title, {'attr': {'class': 'form-control'}}) }}
+		{{ form_row(form.book_price, {'attr': {'class': 'form-control'}}) }}
+		{{ form_row(form.book_description, {'attr': {'class': 'form-control'}}) }}
+		{{ form_row(form.book_image, {'attr': {'class': 'form-control'}}) }}
+		{{ form_row(form.book_author, {'attr': {'class': 'form-control'}}) }}
+		<button type="submit" class="btn btn-success">Edit Book</button>
+		{{ form_end(form) }}
+	</main>
 
+{% endblock %}
