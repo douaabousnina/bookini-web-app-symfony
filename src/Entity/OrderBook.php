@@ -15,10 +15,12 @@ class OrderBook
 
     #[ORM\Column]
     private float $price ;
+
     #[ORM\Id]
     #[ORM\ManyToOne(inversedBy: 'orderBooks')]
     #[ORM\JoinColumn(nullable: false)]
     private Order $order_id;
+    
     #[ORM\Id]
     #[ORM\ManyToOne(inversedBy: 'orderBooks')]
     #[ORM\JoinColumn(nullable: false)]
