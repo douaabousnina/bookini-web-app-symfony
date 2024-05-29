@@ -12,7 +12,7 @@ class BookController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function home(BookRepository $bookRepository): Response
     {
-        $books = $bookRepository->findBy([], null, 5); 
+        $books = $bookRepository->findBy([], null, 4); 
 
         return $this->render('UserInterface/home.html.twig', [
             'books' => $books,
