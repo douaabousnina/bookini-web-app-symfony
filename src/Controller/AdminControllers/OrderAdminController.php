@@ -19,10 +19,19 @@ class OrderAdminController extends AbstractController
         ]);
     }
 
-    #[Route('/addOrder', name: 'app_add_order_admin')]
-    public function add(OrderRepository $orderRepository): Response
+    #[Route('/editOrder/{id}', name: 'app_edit_order_admin')]
+    public function edit(OrderRepository $orderRepository, int $id): Response
     {
-        $orders = $orderRepository->findAll();
-        return $this->render('AdminDashboard/orders.html.twig');
+        $order = $orderRepository->find($id);
+        return $this->render('AdminDashboard/editOrder.html.twig', [
+            'order' => $order
+        ]);
+    }
+
+    #[Route('/deleteOrder/{id}', name: 'app_delete_order_admin')]
+    public function delete(OrderRepository $orderRepository, int $id): Response
+    {
+        
+        return $this->redirect('/adminOrder');
     }
 }
