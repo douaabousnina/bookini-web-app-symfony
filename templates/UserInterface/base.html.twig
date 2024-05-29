@@ -9,12 +9,13 @@
         <link rel="stylesheet" href="{{ asset('https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css') }}" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"crossorigin="anonymous"/>
         <link rel="stylesheet" href="{{ asset('https://use.fontawesome.com/releases/v5.7.2/css/all.css') }}" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ asset('styles/userStyles.css') }}"/>
+		<link rel="stylesheet" href="{{ asset('styles/books.css') }}"/>
     	{% endblock %}
 	</head>
 
 	<body>
 		{{ include('UserInterface/navbar.html.twig') }}
-		{% block body %}{% endblock %}
+		{% block content %}{% endblock %}
 		{{ include('UserInterface/footer.html.twig') }}
 		{% block javascripts %}
             <script src="{{ asset('https://code.jquery.com/jquery-3.3.1.slim.min.js')}}" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
