@@ -13,7 +13,7 @@ class UserController extends AbstractController
     #[Route('/user', name: 'app_user')]
     public function index(): Response
     {
-        return new Response('<div>le ileha ella allah</div>');
-        // return $this->render('');
+        return new Response('');
+
     }
 }

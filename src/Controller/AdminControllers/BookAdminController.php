@@ -11,6 +11,6 @@ class BookAdminController extends AbstractController
     #[Route('/book/admin', name: 'app_book_admin')]
     public function index(): Response
     {
-        return $this->render('');
+        return $this->render('AdminDashboard/addBook.html.twig');
     }
 }

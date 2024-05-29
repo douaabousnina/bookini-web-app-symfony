@@ -23,15 +23,11 @@ class Order
     #[ORM\Column]
     private float $order_total_amount;
 
-    #[ORM\ManyToOne(inversedBy: 'Order')]
-    #[ORM\JoinColumn(nullable: false)]
-    private User $user_id;
+
 
     /**
      * @var Collection<int, OrderBook>
      */
-    #[ORM\OneToMany(targetEntity: OrderBook::class, mappedBy: 'orderId', orphanRemoval: true)]
-    private Collection $orderBooks;
 
     public function __construct()
     {
