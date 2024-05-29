@@ -7,26 +7,12 @@
 {% block content %}
 	<main>
 
-		<a href="orders.php" class="go-back">
+		<a href="{{path('')}}" class="go-back">
 			<span class="material-symbols-outlined">
 				arrow_back
 			</span>
 			<h3>Go back</h3>
 		</a>
-
-		{# <form class="edit-book" action="{{ path('app_update_order_admin', {'id': order.id} ) }}" method="POST">
-									<label for="cid">Order ID:</label>
-									<input type="text" id="order_id" name="order_id" value="{{order.getId()}}" readonly/><br/>
-						
-									<label for="cdate">Order Date:</label>
-									<input type="date" id="cdate" name="cdate" value="{{order.getOrderDate().format('d-m-Y')}}"><br/>
-						
-									<label for="bid">Total Amount:</label>
-									<input type="text" id="bid" name="bid" value="{{order.getOrderTotalAmount()}}"><br/>
-						
-									<button type="submit">Submit changes</button>
-						
-								</form> #}
 
 		{{ form_start(form, {'attr': {'class': 'edit-book'}}) }}
 		{{ form_errors(form) }}
