@@ -7,8 +7,8 @@
 {% block content %}
 	<main>
 		<div class="container" style="display: flex; justify-content: center;">
-				<a class="add-btn" href="storeBook.php">Add book</a>
-			</div>
+			<a class="add-btn" href="{{path('app_add_book_admin')}}">Add book</a>
+		</div>
 
 		<div class="input-group">
 			<input type="search" placeholder="Search a book...">
@@ -56,7 +56,7 @@
 							<td>
 								{{book.getBookDescription()}}
 							</td>
-							
+
 							<td class="action-btns">
 								<div style="display: inline-flex;">
 									<button class="edit-btn" onclick="location.href='{{path('app_edit_book_admin', {'id' : book.getId()})}}'">
@@ -81,8 +81,8 @@
 		</div>
 
 		<div class="container" style="display: flex;
-										                            justify-content: center;
-										                            align-items: center;">
+														                            justify-content: center;
+														                            align-items: center;">
 			<div style="display: flex;"></div>
 		</div>
 	</main>

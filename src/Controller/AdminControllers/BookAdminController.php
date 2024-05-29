@@ -15,7 +15,8 @@ use Symfony\Component\Routing\Attribute\Route;
 
 
 class BookAdminController extends AbstractController
-{    #[Route('/Books/admin', name: 'books')]
+{
+    #[Route('/Books/admin', name: 'books')]
 
     public function index(BookRepository $bookRepository): Response
     {
@@ -26,7 +27,8 @@ class BookAdminController extends AbstractController
     }
     #[Route('/addBook/admin', name: 'app_add_book_admin')]
     public function new(Request $request, EntityManagerInterface $em): Response
-    {   $book=new Book();
+    {
+        $book = new Book();
         $form = $this->createForm(BookType::class, $book);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -36,55 +38,55 @@ class BookAdminController extends AbstractController
             $book->setBookAuthor($form->get('book_author')->getData());
             $book->setBookImage($form->get('book_image')->getData());
             $book->setBookDescription($form->get('book_description')->getData());
+            $book->setBookStock($form->get('book_stock')->getData());
+            
+            $em->persist($book);
             $em->flush();
 
             $this->addFlash('success', 'Book added successfully!');
 
-            return $this->redirect('/adminBook');
+            return $this->redirect('/Books/admin');
         }
 
         return $this->render('AdminDashboard/addBook.html.twig', [
             'form' => $form
         ]);
-
     }
 
-        #[Route('/editBook/{id}', name: 'app_edit_book_admin')]
-        public function edit(BookRepository $bookRepository, int $id,Request $request, EntityManagerInterface $entityManager): Response
-        {
-            $book = $bookRepository->find($id);
-            $form = $this->createForm(BookType::class, $book);
-            $form->handleRequest($request);
-            if ($form->isSubmitted() && $form->isValid()) {
+    #[Route('/editBook/{id}', name: 'app_edit_book_admin')]
+    public function edit(BookRepository $bookRepository, int $id, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $book = $bookRepository->find($id);
+        $form = $this->createForm(BookType::class, $book);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
 
-                $book->setBookPrice($form->get('book_price')->getData());
-                $book->setBookTitle($form->get('book_title')->getData());
-                $book->setBookAuthor($form->get('book_author')->getData());
-                $book->setBookImage($form->get('book_image')->getData());
-                $book->setBookDescription($form->get('book_description')->getData());
-                $entityManager->flush();
-
-                $this->addFlash('success', 'Book updated successfully!');
-
-                return $this->redirect('/adminBook');
-            }
-
-            return $this->render('AdminDashboard/editBook.html.twig', [
-                'form' => $form
-            ]);
-        }
-
-
-
-        #[Route('/deleteBook/{id}', name: 'app_delete_book_admin')]
-        public function delete(BookRepository $bookRepository, EntityManager $entityManager, int $id): Response
-        {
-            $book = $bookRepository->find($id);
-            $entityManager->remove($book);
+            $book->setBookPrice($form->get('book_price')->getData());
+            $book->setBookTitle($form->get('book_title')->getData());
+            $book->setBookAuthor($form->get('book_author')->getData());
+            $book->setBookImage($form->get('book_image')->getData());
+            $book->setBookDescription($form->get('book_description')->getData());
             $entityManager->flush();
-            $this->addFlash('success', 'Book deleted successfully!');
+
+            $this->addFlash('success', 'Book updated successfully!');
+
             return $this->redirect('/Books/admin');
         }
+
+        return $this->render('AdminDashboard/editBook.html.twig', [
+            'form' => $form
+        ]);
     }
 
 
+
+    #[Route('/deleteBook/{id}', name: 'app_delete_book_admin')]
+    public function delete(BookRepository $bookRepository, EntityManagerInterface $entityManager, int $id): Response
+    {
+        $book = $bookRepository->find($id);
+        $entityManager->remove($book);
+        $entityManager->flush();
+        $this->addFlash('success', 'Book deleted successfully!');
+        return $this->redirect('/Books/admin');
+    }
+}
