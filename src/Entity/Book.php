@@ -39,15 +39,6 @@ class Book
      */
 
 
-    public function __construct()
-    {
-        $this->orderBooks = new ArrayCollection();
-    }
-
-
-
-
-
 
 
     public function getId(): ?int
@@ -126,33 +117,6 @@ class Book
         return $this;
     }
 
-    /**
-     * @return Collection<int, OrderBook>
-     */
-    public function getOrderBooks(): Collection
-    {
-        return $this->orderBooks;
-    }
 
-    public function addOrderBook(OrderBook $orderBook): static
-    {
-        if (!$this->orderBooks->contains($orderBook)) {
-            $this->orderBooks->add($orderBook);
-            $orderBook->setBookID($this);
-        }
 
-        return $this;
-    }
-
-    public function removeOrderBook(OrderBook $orderBook): static
-    {
-        if ($this->orderBooks->removeElement($orderBook)) {
-            // set the owning side to null (unless already changed)
-            if ($orderBook->getBookID() === $this) {
-                $orderBook->setBookID(null);
-            }
-        }
-
-        return $this;
-    }
 }
