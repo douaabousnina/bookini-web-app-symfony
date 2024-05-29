@@ -17,8 +17,8 @@
 				<p>
 					Total Price: <s><span id="total-price">{{ total }}</span> TND</s> &nbsp;&nbsp; 50% off
 				</p>
-				<button class="btn btn-light px-5 py-2 primary-btn" onclick="buy_now()">
-					Buy now for <span id="total-reduced-price">{{ (total / 2) }}</span> TND
+				<button class="btn btn-light px-5 py-2 primary-btn">
+					<a style="color: black;" href="{{ path('cart_buy') }}" >Buy now for <span id="total-reduced-price">{{ (total / 2) }}</span> TND</a>
 				</button>
 			</div>
 			<div class="col-md-5 col-sm-12">

@@ -56,4 +56,11 @@ class CartController extends AbstractController
 
         return $this->redirectToRoute('cart_index');
     }
+    #[Route('/buy',name:'buy')]
+    public function buy(SessionInterface $session, ){
+    $session->remove('cart');
+    $this->addFlash('success', 'Your order has been placed successfully!');
+    return $this->redirectToRoute('cart_index');
+
+}
 }
