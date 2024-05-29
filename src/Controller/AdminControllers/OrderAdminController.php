@@ -14,6 +14,10 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class OrderAdminController extends AbstractController
 {
+     /**
+     *
+     * @IsGranted("ROLE_ADMIN")
+     */
     #[Route('/adminOrder', name: 'app_order_admin')]
     public function index(OrderRepository $orderRepository): Response
     {
@@ -23,6 +27,10 @@ class OrderAdminController extends AbstractController
         ]);
     }
 
+     /**
+     *
+     * @IsGranted("ROLE_ADMIN")
+     */
     #[Route('/editOrder/{id}', name: 'app_edit_order_admin')]
     public function edit(OrderRepository $orderRepository, int $id, Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -46,6 +54,10 @@ class OrderAdminController extends AbstractController
         ]);
     }
 
+     /**
+     *
+     * @IsGranted("ROLE_ADMIN")
+     */
     #[Route('/deleteOrder/{id}', name: 'app_delete_order_admin')]
     public function delete(OrderRepository $orderRepository, EntityManagerInterface $entityManager, int $id): Response
     {

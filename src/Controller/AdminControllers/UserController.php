@@ -14,6 +14,10 @@ use Symfony\Component\Routing\Attribute\Route;
 class UserController extends AbstractController
 {
 
+    /**
+     *
+     * @IsGranted("ROLE_ADMIN")
+     */
     #[Route('/adminUsers', name: 'app_users_admin')]
     public function index(UserRepository $userRepository): Response
     {
@@ -23,8 +27,13 @@ class UserController extends AbstractController
         ]);
     }
 
+
+    /**
+     *
+     * @IsGranted("ROLE_ADMIN")
+     */
     #[Route('/editUser/{id}', name: 'app_edit_user_admin')]
-    public function edit(userRepository $userRepository, int $id,Request $request, EntityManagerInterface $entityManager): Response
+    public function edit(userRepository $userRepository, int $id, Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = $userRepository->find($id);
         $form = $this->createForm(UserType::class, $user);
@@ -46,7 +55,10 @@ class UserController extends AbstractController
     }
 
 
-
+    /**
+     *
+     * @IsGranted("ROLE_ADMIN")
+     */
     #[Route('/deleteUser/{id}', name: 'app_delete_user_admin')]
     public function delete(userRepository $userRepository, EntityManager $entityManager, int $id): Response
     {

@@ -16,8 +16,12 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class BookAdminController extends AbstractController
 {
-    #[Route('/Books/admin', name: 'books')]
 
+    /**
+     *
+     * @IsGranted("ROLE_ADMIN")
+     */
+    #[Route('/Books/admin', name: 'books')]
     public function index(BookRepository $bookRepository): Response
     {
         $books = $bookRepository->findAll();
@@ -25,6 +29,11 @@ class BookAdminController extends AbstractController
             'books' => $books
         ]);
     }
+
+    /**
+     *
+     * @IsGranted("ROLE_ADMIN")
+     */
     #[Route('/addBook/admin', name: 'app_add_book_admin')]
     public function new(Request $request, EntityManagerInterface $em): Response
     {
@@ -39,7 +48,7 @@ class BookAdminController extends AbstractController
             $book->setBookImage($form->get('book_image')->getData());
             $book->setBookDescription($form->get('book_description')->getData());
             $book->setBookStock($form->get('book_stock')->getData());
-            
+
             $em->persist($book);
             $em->flush();
 
@@ -53,6 +62,11 @@ class BookAdminController extends AbstractController
         ]);
     }
 
+
+    /**
+     *
+     * @IsGranted("ROLE_ADMIN")
+     */
     #[Route('/editBook/{id}', name: 'app_edit_book_admin')]
     public function edit(BookRepository $bookRepository, int $id, Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -79,7 +93,10 @@ class BookAdminController extends AbstractController
     }
 
 
-
+    /**
+     *
+     * @IsGranted("ROLE_ADMIN")
+     */
     #[Route('/deleteBook/{id}', name: 'app_delete_book_admin')]
     public function delete(BookRepository $bookRepository, EntityManagerInterface $entityManager, int $id): Response
     {
