@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Controller\AdminControllers;
+
+use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
