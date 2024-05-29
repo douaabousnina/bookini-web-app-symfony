@@ -6,32 +6,67 @@
 
 {% block content %}
 	<main>
-		<a href="clients.php" class="go-back">
+		<h1>Users</h1>
+		<div class="input-group">
+			<input type="search" placeholder="Search a user...">
 			<span class="material-symbols-outlined">
-				arrow_back
+				search
 			</span>
-			<h3>Go back</h3>
-		</a>
-		<form class="edit-book" action="updateclient.php" method="POST">
-			<input type="hidden" name="cid" value="<?php echo $arr['cid']; ?>">
+		</div>
 
-			<label for="firstname">Firstname</label>
-			<input type="text" id="firstname" name="firstname" value="<?php echo htmlspecialchars($arr['firstname']); ?>">
+		<div class="users-table">
+			<table>
+				<thead>
+				<tr>
+					<th>Client ID</th>
+					<th>Firstname</th>
+					<th>Lastname</th>
+					<th>Email</th>
+					<th>Role</th>
+					<th>Actions</th>
+				</tr>
+				</thead>
+				<tbody>
+				{% for user in users %}
+					<tr>
+						<td>
+							{{user.getId()}}
+						</td>
+						<td>
+							{{user.getUserFullname()}}
+						</td>
+						<td>
+							{{user.getUserEmail()}}
+						</td>
+						<td>
+							{{user.getRoles()}}
+						</td>
+						<td>
+							{{user.getPassword()}}
+						</td>
 
-			<label for="lastname">Lastname</label>
-			<input type="text" id="lastname" name="lastname" value="<?php echo htmlspecialchars($arr['lastname']); ?>">
+						<td class="action-btns">
+							<div style="display: inline-flex;">
+								<button class="edit-btn" onclick="location.href='{{path('app_edit_user_admin', {'id' : user.getId()})}}'">
+										<span class="material-symbols-outlined">
+											edit
+										</span>
+								</button>
+								<form method="POST" action="{{path('app_edit_user_admin', {'id' : user.getId()})}}">
+									<button onclick="return confirm('Are you sure you want to edit this user')" type="submit" class="edit-btn" name="edit-user">
+											<span class="material-symbols-outlined">
+												delete
+											</span>
+									</button>
+								</form>
+							</div>
+						</td>
+					</tr>
+				{% endfor %}
 
-			<label for="email">Email</label>
-			<input type="text" id="email" name="email" value="<?php echo htmlspecialchars($arr['email']); ?>">
-
-			<label for="role">Role</label>
-			<select name="role" id="role">
-				<option selected disabled>Role</option>
-				{# <option value="user" <?= $arr['isAdmin'] === 0 ? 'selected' : '' ?>>User</option>
-				   <option value="admin" <?= $arr['isAdmin'] === 1 ? 'selected' : '' ?>>Admin</option> #}
-			</select>
-
-			<button type="submit" name="submit">Submit changes</button>
-		</form>
+				</tbody>
+			</table>
+		</div>
 	</main>
 {% endblock %}
+

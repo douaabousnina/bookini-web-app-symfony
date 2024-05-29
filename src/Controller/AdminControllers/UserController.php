@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Controller\AdminControllers;
-
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManager;
@@ -36,7 +35,7 @@ class UserController extends AbstractController
     public function edit(userRepository $userRepository, int $id, Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = $userRepository->find($id);
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserType::class,$user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
