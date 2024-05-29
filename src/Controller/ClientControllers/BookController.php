@@ -39,4 +39,19 @@ class BookController extends AbstractController
     {
         return $this->render('UserInterface/faq.html.twig');
     }
+    #[Route('/books/{id}', name: 'app_book_info')]
+public function bookInfo(BookRepository $bookRepository, int $id): Response
+{
+    $book = $bookRepository->find($id);
+
+    if (!$book) {
+        throw $this->createNotFoundException('The book does not exist');
+    }
+
+    return $this->render('UserInterface/bookinfo.html.twig', [
+        'book' => $book,
+    ]);
+}
+
+
 }
