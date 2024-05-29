@@ -9,46 +9,50 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class UserController extends AbstractController
 {
-    private $entityManager;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    #[Route('/editUser/admin/{id}', name: 'edit_user')]
+    public function edit(Request $request, User $user, EntityManagerInterface $em): Response
     {
-        $this->entityManager = $entityManager;
-    }
-
-    #[Route('/deleteUser', name: 'delete_user')]
-    public function delete(): Response
-    {
-
-
-        return $this->render('AdminDashboard/users.html.twig');
-    }
-
-    #[Route('/editUser/{id}', name: 'edit_user')]
-    public function edit(Request $request, $id): Response
-    {
-        $user = $this->entityManager->getRepository(User::class)->find($id);
-
-        if (!$user) {
-            throw $this->createNotFoundException('No user found for id ' . $id);
-        }
-
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(User::class, $user);
 
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->entityManager->persist($user);
-            $this->entityManager->flush();
-            $this->addFlash('success', 'User updated successfully!');
 
-            return $this->redirectToRoute('edit_user', ['id' => $id]);
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $imageFile */
+            $imageFile = $form->get('image')->getData();
+
+            if ($imageFile) {
+                $newFilename = uniqid().'.'.$imageFile->guessExtension();
+                try {
+                    $imageFile->move(
+                        $this->getParameter('images_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // Handle exception
+                }
+                $user->setImage($newFilename);
+            }
+
+            $em->flush();
+
+            return $this->redirectToRoute('AdminDashboard/editUser.html.twig');
         }
 
-        return $this->render('AdminDashboard/editUser.html.twig', [
+        return $this->render('AdminDashboard/users.html.twig', [
             'form' => $form->createView(),
             'user' => $user,
         ]);
     }
 
+    #[Route('/admin/deleteUser/{id}', name: 'user_delete', methods: ['POST'])]
+    public function delete(Request $request, User $user, EntityManagerInterface $em): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+            $em->remove($user);
+            $em->flush();
+        }
 
+        return $this->redirectToRoute('AdminDashboard/users.html.twig');
+    }
 }
