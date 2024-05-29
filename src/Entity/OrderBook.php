@@ -18,11 +18,11 @@ class OrderBook
     #[ORM\Id]
     #[ORM\ManyToOne(inversedBy: 'orderBooks')]
     #[ORM\JoinColumn(nullable: false)]
-    private Order $orderId;
+    private Order $order_id;
     #[ORM\Id]
     #[ORM\ManyToOne(inversedBy: 'orderBooks')]
     #[ORM\JoinColumn(nullable: false)]
-    private Book $bookID ;
+    private Book $book_id ;
 
     public function getQuantity(): ?int
     {

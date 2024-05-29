@@ -15,7 +15,7 @@ class Order
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $order_id = null;
+    private ?int $id = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $order_date = null;
@@ -40,7 +40,7 @@ class Order
 
     public function getId(): ?int
     {
-        return $this->order_id;
+        return $this->id;
     }
 
     public function getOrderDate(): ?\DateTimeInterface
