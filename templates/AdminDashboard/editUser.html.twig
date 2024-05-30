@@ -1,72 +1,25 @@
 {% extends '/AdminDashboard/base.html.twig' %}
 
 {% block title %}
-    Edit User (+ user_name / user_id)
+	Edit user
 {% endblock %}
 
 {% block content %}
 	<main>
-		<h1>Users</h1>
-		<div class="input-group">
-			<input type="search" placeholder="Search a user...">
+
+		<a href="{{path('app_user_admin')}}" class="go-back">
 			<span class="material-symbols-outlined">
-				search
+				arrow_back
 			</span>
-		</div>
+			<h3>Go back</h3>
+		</a>
 
-		<div class="users-table">
-			<table>
-				<thead>
-				<tr>
-					<th>Client ID</th>
-					<th>Firstname</th>
-					<th>Lastname</th>
-					<th>Email</th>
-					<th>Role</th>
-					<th>Actions</th>
-				</tr>
-				</thead>
-				<tbody>
-				{% for user in users %}
-					<tr>
-						<td>
-							{{user.getId()}}
-						</td>
-						<td>
-							{{user.getUserFullname()}}
-						</td>
-						<td>
-							{{user.getUserEmail()}}
-						</td>
-						<td>
-							{{user.getRoles()}}
-						</td>
-						<td>
-							{{user.getPassword()}}
-						</td>
+		{{ form_start(form, {'attr': {'class': 'edit-book'}}) }}
+		{{ form_errors(form) }}
+		{{ form_row(form.user_, {'attr': {'class': 'form-control'}}) }}
+		{{ form_row(form.order_date, {'attr': {'class': 'form-control'}}) }}
+		<button type="submit" class="btn btn-success">Update Order</button>
+		{{ form_end(form) }}
 
-						<td class="action-btns">
-							<div style="display: inline-flex;">
-								<button class="edit-btn" onclick="location.href='{{path('app_edit_user_admin', {'id' : user.getId()})}}'">
-										<span class="material-symbols-outlined">
-											edit
-										</span>
-								</button>
-								<form method="POST" action="{{path('app_edit_user_admin', {'id' : user.getId()})}}">
-									<button onclick="return confirm('Are you sure you want to edit this user')" type="submit" class="edit-btn" name="edit-user">
-											<span class="material-symbols-outlined">
-												delete
-											</span>
-									</button>
-								</form>
-							</div>
-						</td>
-					</tr>
-				{% endfor %}
-
-				</tbody>
-			</table>
-		</div>
 	</main>
 {% endblock %}
-

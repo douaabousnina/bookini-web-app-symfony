@@ -17,7 +17,7 @@ class UserController extends AbstractController
      *
      * @IsGranted("ROLE_ADMIN")
      */
-    #[Route('/adminUsers', name: 'app_users_admin')]
+    #[Route('/adminUsers', name: 'app_user_admin')]
     public function index(UserRepository $userRepository): Response
     {
         $user = $userRepository->findAll();

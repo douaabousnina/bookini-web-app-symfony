@@ -5,6 +5,7 @@ namespace App\Controller\AdminControllers;
 use App\Entity\Book;
 use App\Form\BookType;
 use App\Repository\BookRepository;
+use App\Repository\OrderRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,7 +22,7 @@ class BookAdminController extends AbstractController
      *
      * @IsGranted("ROLE_ADMIN")
      */
-    #[Route('/Books/admin', name: 'books')]
+    #[Route('/adminBooks', name: 'app_book_admin')]
     public function index(BookRepository $bookRepository): Response
     {
         $books = $bookRepository->findAll();
@@ -54,7 +55,7 @@ class BookAdminController extends AbstractController
 
             $this->addFlash('success', 'Book added successfully!');
 
-            return $this->redirect('/Books/admin');
+            return $this->redirect('/adminBooks');
         }
 
         return $this->render('AdminDashboard/addBook.html.twig', [
@@ -84,7 +85,7 @@ class BookAdminController extends AbstractController
 
             $this->addFlash('success', 'Book updated successfully!');
 
-            return $this->redirect('/Books/admin');
+            return $this->redirect('/adminBooks');
         }
 
         return $this->render('AdminDashboard/editBook.html.twig', [
@@ -104,6 +105,18 @@ class BookAdminController extends AbstractController
         $entityManager->remove($book);
         $entityManager->flush();
         $this->addFlash('success', 'Book deleted successfully!');
-        return $this->redirect('/Books/admin');
+        return $this->redirect('/adminBooks');
+    }
+
+
+    /**
+     *
+     * @IsGranted("ROLE_ADMIN")
+     */
+    #[Route('/adminHome', name: 'app_home_admin')]
+    public function home(OrderRepository $orderRepository): Response
+    {
+        $orders = $orderRepository->findAll();
+        return $this->render('AdminDashboard/home.html.twig', ['orders' => $orders]);
     }
 }
