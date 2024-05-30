@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 main .form {
   font-family: "Sniglet", cursive;
 }
+
 
 section 
 {
@@ -156,4 +158,65 @@ input[type="submit"]:active
     width: calc(20vw - 2px);
     height: calc(20vw - 2px);
   }
+}
+
+
+form{
+  text-align: center;
+  width: 30%;
+  margin-top: 10%;
+  margin-bottom: 15%;
+  margin-left: 35%;
+  margin-right: 35%;
+  padding: 20px;
+  color: white;
+  background-color: #333;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 #000;
+}
+
+h1{
+  font-size: 3em;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: bolder;
+  text-transform: uppercase;
+}
+
+label{
+  font-size: 1.5em;
+  margin-top: 10px;
+  text-align: left;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.submit-btn{
+  width: 100%;
+  padding: 10px;
+  margin: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #a600ff;
+  color: white;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+input[type="text"], input[type="password"]{
+  padding: 10px;
+  margin: 10px;
+  border: none;
+  border-radius: 5px;
+  text-align: left;
+  background-color: #a600ff00;
+  color: white;
+  border-bottom: 2px solid rgb(255, 255, 255);
+  margin-bottom: 30px;
+}
+
+.absence {
+  color: rgb(128, 0, 157);
+  text-align: left;
+  float: left;
+  padding-left: 10px;
 }
