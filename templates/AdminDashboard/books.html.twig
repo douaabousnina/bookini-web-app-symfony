@@ -17,6 +17,12 @@
 			</span>
 		</div>
 
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success">
+				{{ message }}
+			</div>
+		{% endfor %}
+		
 		<div class="recent-orders">
 			<table>
 				<thead>
@@ -81,8 +87,8 @@
 		</div>
 
 		<div class="container" style="display: flex;
-														                            justify-content: center;
-														                            align-items: center;">
+																		                            justify-content: center;
+																		                            align-items: center;">
 			<div style="display: flex;"></div>
 		</div>
 	</main>

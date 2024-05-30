@@ -3,10 +3,9 @@
 namespace App\Controller\AdminControllers;
 
 use App\Form\OrderType;
+use App\Entity\Order;
 use App\Repository\OrderRepository;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,7 +17,7 @@ class OrderAdminController extends AbstractController
      *
      * @IsGranted("ROLE_ADMIN")
      */
-    #[Route('/adminOrder', name: 'app_order_admin')]
+    #[Route('/adminOrders', name: 'app_order_admin')]
     public function index(OrderRepository $orderRepository): Response
     {
         $orders = $orderRepository->findAll();
@@ -35,6 +34,7 @@ class OrderAdminController extends AbstractController
     public function edit(OrderRepository $orderRepository, int $id, Request $request, EntityManagerInterface $entityManager): Response
     {
         $order = $orderRepository->find($id);
+
         $form = $this->createForm(OrderType::class, $order);
 
         $form->handleRequest($request);
@@ -46,7 +46,7 @@ class OrderAdminController extends AbstractController
         
             $this->addFlash('success', 'Order updated successfully!');
 
-            return $this->redirect('/adminOrder');
+            return $this->redirect('/adminOrders');
         }
 
         return $this->render('AdminDashboard/editOrder.html.twig', [
@@ -65,6 +65,6 @@ class OrderAdminController extends AbstractController
         $entityManager->remove($order);
         $entityManager->flush();
         $this->addFlash('success', 'Order deleted successfully!');
-        return $this->redirect('/adminOrder');
+        return $this->redirect('/adminOrders');
     }
 }
