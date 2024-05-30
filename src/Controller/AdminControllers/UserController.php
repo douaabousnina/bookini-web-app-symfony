@@ -43,7 +43,9 @@ class UserController extends AbstractController
 
             $user->setUserFullname($form->get('user_fullname')->getData());
             $user->setUserEmail($form->get('user_email')->getData());
-            $user->setRoles($form->get('roles')->getData());
+            // $user->setVerified($form->get('isVerified')->getData());
+
+            // $user->setRoles($form->get('roles')->getData());
 
             $entityManager->flush();
 
