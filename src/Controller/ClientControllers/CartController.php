@@ -66,25 +66,28 @@ class CartController extends AbstractController
 
 
     #[Route('/buy', name: 'buy')]
-    public function buy(SessionInterface $session, EntityManagerInterface $entityManager, BookRepository $bookRepository )
+    public function buy(SessionInterface $session, EntityManagerInterface $entityManager, BookRepository $bookRepository)
     {
-        
+        if (!$this->getUser()) {
+            $this->addFlash('error', 'You have to log in to pass your order!');
+            return $this->redirectToRoute('app_login');
+        }
+
         $order = new Order();
 
         $order->setOrderDate(new \DateTime('today'));
         $order->setOrderTotalAmount(0);
 
         $cartElements = $session->get('cart');
-        
+
         foreach ($cartElements as $id => $quantity) {
             $book = $bookRepository->find($id);
-
             $order->setOrderTotalAmount($order->getOrderTotalAmount() + $book->getBookPrice());
         }
 
         $entityManager->persist($order);
         $entityManager->flush();
-        
+
         $session->remove('cart');
         $this->addFlash('success', 'Your order has been placed successfully!');
         return $this->redirectToRoute('cart_index');
