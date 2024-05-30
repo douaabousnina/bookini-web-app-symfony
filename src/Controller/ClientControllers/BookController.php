@@ -29,9 +29,9 @@ class BookController extends AbstractController
         ]);
     }
 
-    #[Route('/book', name: 'app_book')]
-    public function index(): Response
-    {
-        return new Response('<div>Hello World</div>');
-    }
+    // #[Route('/book', name: 'app_book')]
+    // public function index(): Response
+    // {
+    //     return new Response('<div>Hello World</div>');
+    // }
 }

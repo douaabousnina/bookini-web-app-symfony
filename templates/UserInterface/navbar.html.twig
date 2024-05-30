@@ -10,20 +10,24 @@
 				<div class="mr-auto"></div>
 				<ul class="navbar-nav">
 					<li class="nav-item active">
-						<a class="nav-link" href="">HOME
+						<a class="nav-link" href="{{path('{{path('app_book')}}')}}">HOME
 							<span class="sr-only">(current)</span>
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="{{path('app_book')}}">BOOKS</a>
+						<a class="nav-link" href="{{path('app_books')}}">BOOKS</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="{{path('cart_index')}}">CART</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="">FAQ</a>
+						<a class="nav-link" href="{{path('')}}">FAQ</a>
 					</li>
 					<li class="nav-item">
+						{%
+							
+						%}
+						<a class="nav-link" href="{{path('app_book')}}">Sign up</a>
 					</li>
 				</ul>
 			</div>
