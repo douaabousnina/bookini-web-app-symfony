@@ -5,6 +5,7 @@ namespace App\Controller\ClientControllers;
 use App\Entity\Book;
 use App\Entity\Order;
 use App\Repository\BookRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -71,12 +72,18 @@ class CartController extends AbstractController
         $order = new Order();
 
         $order->setOrderDate(new \DateTime('today'));
+        $order->setOrderTotalAmount(0);
 
         $cartElements = $session->get('cart');
         
-        // foreach ($cartElements as $cartElement) {
-        //     $book = $bookRepository->find($cartElement->);
-        // }
+        foreach ($cartElements as $id => $quantity) {
+            $book = $bookRepository->find($id);
+
+            $order->setOrderTotalAmount($order->getOrderTotalAmount() + $book->getBookPrice());
+        }
+
+        $entityManager->persist($order);
+        $entityManager->flush();
         
         $session->remove('cart');
         $this->addFlash('success', 'Your order has been placed successfully!');
