@@ -25,10 +25,9 @@
 				<thead>
 					<tr>
 						<th>Client ID</th>
-						<th>Firstname</th>
-						<th>Lastname</th>
+						<th>Full Name</th>
 						<th>Email</th>
-						<th>Role</th>
+						<th>Roles</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
@@ -45,15 +44,17 @@
 								{{user.getUserEmail()}}
 							</td>
 							<td>
-								{{user.getRoles()}}
+								{% for role in user.getRoles() %}
+									{{role}} ,
+								{% endfor %}
 							</td>
-							<td>
+							{# <td>
 								{{user.getPassword()}}
-							</td>
+							</td> #}
 
 							<td class="action-btns">
 								<div style="display: inline-flex;">
-									<button class="edit-btn" onclick="location.href='{{path('app_delete_user_admin', {'id' : user.getId()})}}'">
+									<button class="edit-btn" onclick="location.href='{{path('app_edit_user_admin', {'id' : user.getId()})}}'">
 										<span class="material-symbols-outlined">
 											edit
 										</span>

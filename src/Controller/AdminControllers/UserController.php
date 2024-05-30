@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller\AdminControllers;
+
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManager;
@@ -20,9 +21,9 @@ class UserController extends AbstractController
     #[Route('/adminUsers', name: 'app_user_admin')]
     public function index(UserRepository $userRepository): Response
     {
-        $user = $userRepository->findAll();
+        $users = $userRepository->findAll();
         return $this->render('AdminDashboard/users.html.twig', [
-            'users' => $user
+            'users' => $users
         ]);
     }
 
@@ -35,12 +36,15 @@ class UserController extends AbstractController
     public function edit(userRepository $userRepository, int $id, Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = $userRepository->find($id);
-        $form = $this->createForm(UserType::class,$user);
+        $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
 
             $user->setUserFullname($form->get('user_fullname')->getData());
             $user->setUserEmail($form->get('user_email')->getData());
+            $user->setRoles($form->get('roles')->getData());
+
             $entityManager->flush();
 
             $this->addFlash('success', 'User updated successfully!');
@@ -59,7 +63,7 @@ class UserController extends AbstractController
      * @IsGranted("ROLE_ADMIN")
      */
     #[Route('/deleteUser/{id}', name: 'app_delete_user_admin')]
-    public function delete(userRepository $userRepository, EntityManager $entityManager, int $id): Response
+    public function delete(userRepository $userRepository, EntityManagerInterface $entityManager, int $id): Response
     {
         $user = $userRepository->find($id);
         $entityManager->remove($user);

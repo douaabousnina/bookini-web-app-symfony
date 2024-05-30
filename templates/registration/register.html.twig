@@ -15,13 +15,15 @@
 
 	<h1>Register</h1>
 
+	<h4 style="transform: translate(39%, 1%);">
+		Already have an account?
+		<a href="{{path('app_login')}}">log in!</a>
+	</h4>
+
 	{{ form_start(registrationForm) }}
 
 	{{ form_errors(registrationForm) }}
 
-	{#{ form_row(registrationForm.id,
-	            {label: 'User ID:'})
-	        }#}
 	{{ form_row(registrationForm.user_email, {
             label: 'Email:'
         }) }}
@@ -32,8 +34,8 @@
             label: 'Password:'
         }) }}
 	{#{ form_row(registrationForm.roles, {
-	            label: 'Roles:'
-	        }) }#}
+					            label: 'Roles:'
+					        }) }#}
 	{{ form_row(registrationForm.agreeTerms, {
             label: 'I have read and agree to the terms of service\n:'
         })  }}
