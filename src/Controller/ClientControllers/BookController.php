@@ -12,7 +12,7 @@ class BookController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function home(BookRepository $bookRepository): Response
     {
-        $books = $bookRepository->findBy([], null, 4); 
+        $books = $bookRepository->findBy([], null, 4);
 
         return $this->render('UserInterface/home.html.twig', [
             'books' => $books,
@@ -22,7 +22,7 @@ class BookController extends AbstractController
     #[Route('/books', name: 'app_books')]
     public function books(BookRepository $bookRepository): Response
     {
-        $books = $bookRepository->findAll(); 
+        $books = $bookRepository->findAll();
 
         return $this->render('UserInterface/books.html.twig', [
             'books' => $books,
@@ -34,19 +34,18 @@ class BookController extends AbstractController
     {
         return $this->render('UserInterface/faq.html.twig');
     }
+    
     #[Route('/books/{id}', name: 'app_book_info')]
-public function bookInfo(BookRepository $bookRepository, int $id): Response
-{
-    $book = $bookRepository->find($id);
+    public function bookInfo(BookRepository $bookRepository, int $id): Response
+    {
+        $book = $bookRepository->find($id);
 
-    if (!$book) {
-        throw $this->createNotFoundException('The book does not exist');
+        if (!$book) {
+            throw $this->createNotFoundException('The book does not exist');
+        }
+
+        return $this->render('UserInterface/bookinfo.html.twig', [
+            'book' => $book,
+        ]);
     }
-
-    return $this->render('UserInterface/bookinfo.html.twig', [
-        'book' => $book,
-    ]);
-}
-
-
 }
