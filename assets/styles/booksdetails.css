@@ -387,24 +387,23 @@ footer .row .col-md-4 a:hover {
 
 .image-container {
     width: 50%; 
-    height: auto;
     margin: auto;
     padding: 1em;
     display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .image-wrapper {
-    max-width: 70%; /* Adjust the percentage to make the image smaller */
-    max-height: 70%; /* Adjust the percentage to maintain aspect ratio */
-  }
-  
-  .book-cover {
-    height: auto;
-    display: block;
-  }
-  
+    justify-content: center; 
+    align-items: center; 
+}
+
+.image-wrapper {
+    max-width: 70%; 
+    max-height: 70%; 
+}
+
+.book-cover {
+    width: 100%; 
+    height: auto; 
+}
+
   
   .book-details {
     width: 70%;

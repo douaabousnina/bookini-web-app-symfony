@@ -128,7 +128,8 @@
             {% for book in books %}
                 <div class="col-md-3">
                     <div class="book-item">
-                        <a href="/book/{{ book.getId() }}" class="fill-div">
+                        <a href="{{ path('app_book_info', {'id': book.getId()}) }}" class="fill-div">
+
                             <img class="book-cover" src="{{ asset(book.getBookImage()) }}" alt="{{ book.getBookTitle() }}" />
                             <p class="book-title">{{ book.getBookTitle() }}</p>
                             <p class="book-author">{{ book.getBookAuthor() }}</p>
@@ -257,7 +258,7 @@
                             var bookItem = document.createElement('div');
                             bookItem.classList.add('book-item');
                             bookItem.innerHTML = `
-                                <a href="/book/${book.getId()}" class="fill-div">
+                                <a href="/books/${book.getId()}" class="fill-div">
                                     <img class="book-cover" src="${book.getImage()}" alt="book" />
                                     <p class="book-title">${book.getTitle()}</p>
                                     <p class="book-author">${book.getAuthor()}</p>
