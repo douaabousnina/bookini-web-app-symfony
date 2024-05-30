@@ -383,10 +383,10 @@ footer .row .col-md-4 a:hover {
   color: lightblue;
 }
 
-/* book info page */
+
 
 .image-container {
-    width: 50%; 
+    width: 100%; 
     margin: auto;
     padding: 1em;
     display: flex;
@@ -394,14 +394,12 @@ footer .row .col-md-4 a:hover {
     align-items: center; 
 }
 
-.image-wrapper {
-    max-width: 70%; 
-    max-height: 70%; 
-}
+
 
 .book-cover {
-    width: 100%; 
+    width: 50%; 
     height: auto; 
+    padding:7em;
 }
 
   

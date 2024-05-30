@@ -3,15 +3,18 @@
 {% block title %}
     {{ book.getBookTitle() }} - Book Info
 {% endblock %}
-
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('styles/booksdetails.css') }}"/>
+{% endblock %}
 {% block content %}
+
 <header>
 <main>
     <section class="description-sec">
         <div class="image-container">
-        <div class="image-wrapper">
+        
             <img class="book-cover" src="{{ asset(book.getBookImage()) }}" alt="book cover"/>
-        </div>
+       
     </div>
         <div class="description-container">
             <div class="title">
