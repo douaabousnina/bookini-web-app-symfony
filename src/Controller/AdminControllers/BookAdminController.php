@@ -55,7 +55,7 @@ class BookAdminController extends AbstractController
 
             $this->addFlash('success', 'Book added successfully!');
 
-            return $this->redirect('/Books/admin');
+            return $this->redirect('/adminBooks');
         }
 
         return $this->render('AdminDashboard/addBook.html.twig', [
